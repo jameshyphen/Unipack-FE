@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="Unipack_FE.MainPage"
+    x:Class="Unipack.MainPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Unipack_FE"
+    xmlns:local="using:Unipack"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -42,15 +42,17 @@
                                 Background="#FF00385F" RequestedTheme="Dark" Height="50"
                 >
                     <Button.Flyout>
-                        <MenuFlyout
+                        <MenuFlyout x:Name="WelcomeDropDownMenuFlyout"
                             Placement="BottomEdgeAlignedRight">
                             <MenuFlyout.MenuFlyoutPresenterStyle>
                                 <Style TargetType="MenuFlyoutPresenter">
                                     <Setter Property="Background" Value="#FF00385F"/>
                                 </Style>
                             </MenuFlyout.MenuFlyoutPresenterStyle>
-                            <MenuFlyoutItem Text="Account Settings"/>
-                            <MenuFlyoutItem Text="Log out"/>
+                            <MenuFlyoutItem x:Name="MenuFlyOutLogin" Text="Login" Click="BtnLogin_Click"/>
+                            <MenuFlyoutItem x:Name="MenuFlyOutRegister" Text="Register" Click="BtnRegister_Click"/>
+                            <MenuFlyoutItem x:Name="MenuFlyOutAccountSettings" Text="Account settings" Visibility="Collapsed" Click="BtnAccountSettings_Click"/>
+                            <MenuFlyoutItem x:Name="MenuFlyOutLogOut" Text="Log out" Visibility="Collapsed" Click="BtnLogOut_Click"/>
                         </MenuFlyout>
                     </Button.Flyout>
                 </DropDownButton>
@@ -60,7 +62,7 @@
             <StackPanel
             Grid.Row="1"
             >
-                <Button
+                <Button x:Name="BtnVacations"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Stretch"
@@ -70,7 +72,8 @@
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto" MinWidth="35" />
-                            <ColumnDefinition />
+                            <ColumnDefinition Width="53*" />
+                            <ColumnDefinition Width="142*"/>
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <SymbolIcon
@@ -83,11 +86,11 @@
                         <TextBlock 
                         Grid.Column="1"
                         HorizontalAlignment="Left"
-                        VerticalAlignment="Center" Height="19" Width="59"
+                        VerticalAlignment="Center" Height="19" Width="59" Grid.ColumnSpan="2"
                     >Vacations</TextBlock>
                     </Grid>
                 </Button>
-                <Button
+                <Button x:Name="BtnItems"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Stretch"
@@ -116,7 +119,7 @@
                     >Items</TextBlock>
                     </Grid>
                 </Button>
-                <Button
+                <Button x:Name="BtnCategories"
                 VerticalAlignment="Stretch"
                 HorizontalAlignment="Stretch" 
                 HorizontalContentAlignment="Stretch"
@@ -145,14 +148,14 @@
                 </Button>
             </StackPanel>
             <StackPanel
-                Grid.Row="3"    
+                Grid.Row="2"
+                VerticalAlignment="Bottom"
             >
-                <Button
-                    VerticalAlignment="Stretch"
+                <Button x:Name="BtnLogin"
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch"
                     RequestedTheme="Dark" 
-                    Background="#FF00385F" Height="50" Click="Button_Click"
+                    Background="#FF00385F" Height="50" Click="BtnLogin_Click"
                 >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -173,39 +176,43 @@
                             Grid.Column="1"
                             HorizontalAlignment="Left"
                             VerticalAlignment="Center"
-                            Text="Sign in"
+                            Text="Login"
+                            
+                        ></TextBlock>
+                    </Grid>
+                </Button>
+                <Button x:Name="BtnRegister"
+                        HorizontalAlignment="Stretch" 
+                        HorizontalContentAlignment="Stretch"
+                        RequestedTheme="Dark" 
+                        Background="#FF00385F" Height="50" Click="BtnRegister_Click"
+                >
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" MinWidth="35" />
+                            <ColumnDefinition Width="37*" />
+                            <ColumnDefinition Width="28*"/>
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+
+                        <SymbolIcon
+                            Grid.Column="0"
+                            Symbol="Add" 
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center" 
+                            AllowDrop="True"
+
+                        />
+                        <TextBlock 
+                            Grid.Column="1"
+                            HorizontalAlignment="Left"
+                            VerticalAlignment="Center"
+                            Text="Register"
                             
                         ></TextBlock>
                     </Grid>
                 </Button>
             </StackPanel>
         </Grid>
-        <!-- Right panel -->
-        <Grid
-            Column="1"
-            Margin="20"
-        >
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-                <RowDefinition/>
-            </Grid.RowDefinitions>
-        </Grid>
-        
     </Grid>
 </Page>

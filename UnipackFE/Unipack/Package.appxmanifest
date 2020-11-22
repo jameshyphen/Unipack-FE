@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="5b8e1dfb-9f89-495a-9acc-ca4a31363a31"
-    Publisher="CN=Fredn"
+    Name="fec64bff-9867-4299-b431-5eca248fa4e7"
+    Publisher="CN=dzhem"
     Version="1.0.0.0" />
 
-  <mp:PhoneIdentity PhoneProductId="5b8e1dfb-9f89-495a-9acc-ca4a31363a31" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="fec64bff-9867-4299-b431-5eca248fa4e7" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>App1</DisplayName>
-    <PublisherDisplayName>Fredn</PublisherDisplayName>
+    <DisplayName>Unipack</DisplayName>
+    <PublisherDisplayName>dzhem</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="App1.App">
+      EntryPoint="Unipack.App">
       <uap:VisualElements
-        DisplayName="App1"
+        DisplayName="Unipack"
         Square150x150Logo="Assets\Square150x150Logo.png"
         Square44x44Logo="Assets\Square44x44Logo.png"
-        Description="App1"
+        Description="Unipack"
         BackgroundColor="transparent">
         <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
@@ -44,6 +44,8 @@
   </Applications>
 
   <Capabilities>
-    <Capability Name="internetClient" />
+    <Capability Name="internetClientServer"/>
+    <Capability Name="privateNetworkClientServer"/>
+    <uap:Capability Name="sharedUserCertificates"/>
   </Capabilities>
 </Package>
