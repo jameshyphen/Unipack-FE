@@ -15,8 +15,7 @@
         </Grid.ColumnDefinitions>
         <Border Grid.Column ="0" Grid.RowSpan="12" Background="#FF004778"/>
 
-        <Border Grid.Column ="1" Grid.RowSpan="12" Background="#FF001F5D" BorderBrush="White">
-        </Border>
+        <Border Grid.Column ="1" Grid.RowSpan="12" Background="#FF001F5D" BorderBrush="White"/>
 
         <!-- Left panel -->
         <Grid 
@@ -68,6 +67,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Style="{ThemeResource ButtonRevealStyle}"
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -96,6 +96,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Style="{ThemeResource ButtonRevealStyle}"        
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -125,6 +126,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Style="{ThemeResource ButtonRevealStyle}"        
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
