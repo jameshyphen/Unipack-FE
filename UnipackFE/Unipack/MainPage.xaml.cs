@@ -73,9 +73,10 @@ namespace Unipack
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
             }
         }
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        { }
 
-        
-        private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
+            private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -97,30 +98,21 @@ namespace Unipack
             WelcomeDropDown.DataContext = WelcomeString;
         }
 
+        private void BtnVacations_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(VacationPage));
+        }
 
-        //Uncomment these when pages have been made
+        private void BtnItems_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(ItemPage));
 
-        //private void BtnVacations_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(VacationPage));
-        //}
+        }
 
-        //private void BtnItems_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(ItemPage));
+        private void BtnCategories_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(CategoryPage));
 
-        //}
-
-        //private void BtnCategories_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(CategoryPage));
-
-        //}
-
-        //private void BtnRegister_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(RegisterPage));
-
-        //}
+        }
     }
 }
