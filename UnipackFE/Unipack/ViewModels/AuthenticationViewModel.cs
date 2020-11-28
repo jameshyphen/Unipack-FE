@@ -24,7 +24,29 @@ namespace Unipack.ViewModels
         }
         public async Task Register(Register register)
         {
+            try
+            {
+                HttpClient client = new HttpClient();
+                var loginJson = JsonConvert.SerializeObject(register);
+                var res = await client.PostAsync("https://localhost:5001/api/account/register",
+                    new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
+                var result = res.Content.ReadAsStringAsync().Result;
+                AuthenticationDto auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
+                this.Token = auth.Token;
+                this.User = new User
+                {
+                    UserId = auth.UserDto.UserId,
+                    Username = auth.UserDto.Username,
+                    FirstName = auth.UserDto.FirstName,
+                    Email = auth.UserDto.Email,
+                    LastName = auth.UserDto.LastName
+                };
 
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Something went wrong: {e}");
+            }
         }
 
         public async Task Login(Login login)

@@ -140,6 +140,8 @@
     </Compile>
     <Compile Include="Views\VacationPage.xaml.cs">
       <DependentUpon>VacationPage.xaml</DependentUpon>
+    <Compile Include="Views\RegisterPage.xaml.cs">
+      <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
