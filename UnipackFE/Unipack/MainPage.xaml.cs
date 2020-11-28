@@ -76,43 +76,7 @@ namespace Unipack
         private async void BtnRegister_Click(object sender, RoutedEventArgs e)
         { }
 
-        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
-        {
-            RegisterPage registerPage = new RegisterPage();
-
-            ContentDialog noWifiDialog = new ContentDialog
-            {
-                Title = "Register",
-                Content = registerPage,
-                PrimaryButtonText = "Register",
-                CloseButtonText = "Cancel",
-                PrimaryButtonCommand = new RelayCommand(async () =>
-                {
-                    var password = registerPage.GetPassword();
-                    var passwordConfirmation = registerPage.GetPasswordConfirmation();
-                    if(password.Equals(passwordConfirmation))
-                    await this._authenticationVM.Register(new Register
-                    {
-                        UserName = registerPage.GetUsername(),
-                        Password = password
-                    });
-                }, () => registerPage.Validate()),
-            };
-
-            await noWifiDialog.ShowAsync();
-            if (this._authenticationVM.User != null)
-            {
-                string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
-                WelcomeDropDown.DataContext = WelcomeString;
-                this.BtnLogin.Visibility = Visibility.Collapsed;
-                this.BtnRegister.Visibility = Visibility.Collapsed;
-                this.MenuFlyOutLogin.Visibility = Visibility.Collapsed;
-                this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
-                this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
-                this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
-            }
-        }
-        private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
+            private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }
