@@ -100,27 +100,27 @@ namespace Unipack
 
         //Uncomment these when pages have been made
 
-        //private void BtnVacations_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(VacationPage));
-        //}
+        private void BtnVacations_Click(object sender, RoutedEventArgs e)
+        {
+            mainFrame.Navigate(typeof(VacationPage));
+        }
 
-        //private void BtnItems_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(ItemPage));
+        private void BtnItems_Click(object sender, RoutedEventArgs e)
+        {
+          // mainFrame.Navigate(typeof(ItemPage));
 
-        //}
+        }
 
-        //private void BtnCategories_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(CategoryPage));
+        private void BtnCategories_Click(object sender, RoutedEventArgs e)
+        {
+           // mainFrame.Navigate(typeof(CategoryPage));
 
-        //}
+        }
 
-        //private void BtnRegister_Click(object sender, RoutedEventArgs e)
-        //{
-        //    mainFrame.Navigate(typeof(RegisterPage));
+        private void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+           //mainFrame.Navigate(typeof(RegisterPage));
 
-        //}
+        }
     }
 }

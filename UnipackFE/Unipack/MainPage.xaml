@@ -18,6 +18,8 @@
         <Border Grid.Column ="1" Grid.RowSpan="12" Background="#FF001F5D" BorderBrush="White"/>
 
         <!-- Left panel -->
+
+
         <Grid 
             Column="0"
             >
@@ -221,7 +223,6 @@
                 </Button>
             </StackPanel>
         </Grid>
-        
         <!-- Right Panel -->
         <Grid Grid.Column="1">
             <Frame x:Name="mainFrame"/>
