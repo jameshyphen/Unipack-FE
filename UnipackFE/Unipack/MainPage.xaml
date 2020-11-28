@@ -158,6 +158,7 @@
                     HorizontalContentAlignment="Stretch"
                     RequestedTheme="Dark" 
                     Background="#FF00385F" Height="50" Click="BtnLogin_Click"
+                    Style="{ThemeResource ButtonRevealStyle}"    
                 >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -188,6 +189,7 @@
                         HorizontalContentAlignment="Stretch"
                         RequestedTheme="Dark" 
                         Background="#FF00385F" Height="50" Click="BtnRegister_Click"
+                        Style="{ThemeResource ButtonRevealStyle}"
                 >
                     <Grid>
                         <Grid.ColumnDefinitions>
