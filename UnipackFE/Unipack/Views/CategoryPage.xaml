@@ -1,5 +1,5 @@
 ﻿<Page
-    x:Class="Unipack.Views.VacationPage"
+    x:Class="Unipack.Views.CategoryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:Unipack.Views"
@@ -9,7 +9,6 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <Button Content="Button" Margin="0,325,0,0" VerticalAlignment="Top" Height="341" Width="545" HorizontalAlignment="Center"/>
 
     </Grid>
 </Page>
