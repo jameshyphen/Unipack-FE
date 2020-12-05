@@ -1,15 +1,14 @@
 ﻿using System;
-using Unipack.Enums;
+using System.Collections.Generic;
 
 namespace Unipack.Models
 {
-    public class Item
+    public class Category
     {
-        public int ItemId { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public User Author { get; set; }
+        public ICollection<Item> Items { get; set; }
         public DateTime AddedOn { get; set; }
-        public Priority Priority { get; set; }
-        public Category Category { get; set; }
     }
 }

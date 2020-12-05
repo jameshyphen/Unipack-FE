@@ -3,13 +3,19 @@ using Unipack.Enums;
 
 namespace Unipack.Models
 {
-    public class Item
+    public class VacationTask
     {
-        public int ItemId { get; set; }
+        public int VacationTaskId { get; set; }
+
         public string Name { get; set; }
         public User Author { get; set; }
+
         public DateTime AddedOn { get; set; }
-        public Priority Priority { get; set; }
-        public Category Category { get; set; }
+
+        public DateTime DeadLine { get; set; }
+
+        public Boolean Completed;
+
+        public Priority Priority;
     }
 }
