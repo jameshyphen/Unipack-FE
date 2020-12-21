@@ -12,7 +12,7 @@ using Unipack.Models;
 
 namespace Unipack.ViewModels
 {
-    class AuthenticationViewModel : BindableBase
+    public class AuthenticationViewModel : BindableBase
     {
         public string Token { get; set; }
         public User User { get; set; }
@@ -22,6 +22,7 @@ namespace Unipack.ViewModels
             this.User = null;
             this.Token = null;
         }
+
         public async Task Register(Register register)
         {
 
@@ -31,22 +32,31 @@ namespace Unipack.ViewModels
         {
             try
             {
+
                 HttpClient client = new HttpClient();
                 var loginJson = JsonConvert.SerializeObject(login);
-                var res = await client.PostAsync("https://localhost:5001/api/account/login",
+                Console.WriteLine(loginJson);
+                var res = await client.PostAsync("http://www.hyphen-solutions.be/unipack/api/account/login",
                     new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
                 var result = res.Content.ReadAsStringAsync().Result;
-                AuthenticationDto auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
-                this.Token = auth.Token;
-                this.User = new User
-                {
-                    UserId = auth.UserDto.UserId,
-                    Username = auth.UserDto.Username,
-                    FirstName = auth.UserDto.FirstName,
-                    Email = auth.UserDto.Email,
-                    LastName = auth.UserDto.LastName
-                };
+                var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
 
+                if (res.IsSuccessStatusCode)
+                {
+                    this.Token = auth.Token;
+                    this.User = new User
+                    {
+                        UserId = auth.UserDto.UserId,
+                        Username = auth.UserDto.Username,
+                        FirstName = auth.UserDto.FirstName,
+                        Email = auth.UserDto.Email,
+                        LastName = auth.UserDto.LastName
+                    };
+                }
+                else
+                {
+                    throw new Exception(auth.Message);
+                }
             }
             catch (Exception e)
             {

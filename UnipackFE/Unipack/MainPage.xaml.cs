@@ -9,6 +9,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using GalaSoft.MvvmLight.Command;
+using Unipack.DTOs;
+using Unipack.Views.Dialogs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -43,24 +45,12 @@ namespace Unipack
 
         private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            LoginPage loginPage = new LoginPage();
-            ContentDialog noWifiDialog = new ContentDialog
-            {
-                Title = "Sign in",
-                Content = loginPage,
-                PrimaryButtonText = "Log in",
-                CloseButtonText = "Cancel",
-                PrimaryButtonCommand = new RelayCommand(async () =>
-                {
-                    await this._authenticationVM.Login(new Login
-                    {
-                        Username = loginPage.GetUsername(),
-                        Password = loginPage.GetPassword()
-                    });
-                }, () => loginPage.Validate()),
-            };
+            LoginContentDialog loginContentDialog = new LoginContentDialog(_authenticationVM);
 
-            await noWifiDialog.ShowAsync();
+            await loginContentDialog.ShowAsync();
+            if (!loginContentDialog.Success)
+                return;
+
             if (this._authenticationVM.User != null)
             {
                 string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
