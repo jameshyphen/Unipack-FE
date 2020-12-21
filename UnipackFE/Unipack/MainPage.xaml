@@ -67,6 +67,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Click="BtnVacations_Click"
                 Style="{ThemeResource ButtonRevealStyle}"
             >
                     <Grid>
@@ -96,6 +97,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Click="BtnItems_Click"
                 Style="{ThemeResource ButtonRevealStyle}"        
             >
                     <Grid>
@@ -126,6 +128,7 @@
                 HorizontalContentAlignment="Stretch"
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
+                Click="BtnCategories_Click"
                 Style="{ThemeResource ButtonRevealStyle}"        
             >
                     <Grid>
@@ -157,7 +160,8 @@
                     HorizontalAlignment="Stretch" 
                     HorizontalContentAlignment="Stretch"
                     RequestedTheme="Dark" 
-                    Background="#FF00385F" Height="50" Click="BtnLogin_Click"
+                    Background="#FF00385F" Height="50" 
+                    Click="BtnLogin_Click"
                 >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -187,7 +191,8 @@
                         HorizontalAlignment="Stretch" 
                         HorizontalContentAlignment="Stretch"
                         RequestedTheme="Dark" 
-                        Background="#FF00385F" Height="50" Click="BtnRegister_Click"
+                        Background="#FF00385F" Height="50" 
+                        Click="BtnRegister_Click"
                 >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -215,6 +220,11 @@
                     </Grid>
                 </Button>
             </StackPanel>
+        </Grid>
+        
+        <!-- Right Panel -->
+        <Grid Grid.Column="1">
+            <Frame x:Name="mainFrame"/>
         </Grid>
     </Grid>
 </Page>
