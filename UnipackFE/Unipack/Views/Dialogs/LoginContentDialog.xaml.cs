@@ -66,30 +66,35 @@ namespace Unipack.Views.Dialogs
 
         public bool Validate()
         {
+            string result = "";
+            bool success = true;
+
             if (this.TxtUsername.Text.Length == 0)
             {
-                this.TxtBottomError.Text = "Username is required.";
-                return false;
+                result += "Username is required.\n";
+                success = false;
+            }
+            else if (this.TxtUsername.Text.Length < 6)
+            {
+                result += "Username must be minimum 6 characters.\n";
+                success = false;
             }
 
             if (this.PsbPassword.Password.Length == 0)
             {
-                this.TxtBottomError.Text = "Password is required.";
-                return false;
-            }
-   
-            if (this.TxtUsername.Text.Length < 6)
+                result += "Password is required.\n";
+                success = false;
+            } else if (this.PsbPassword.Password.Length < 6)
             {
-                this.TxtBottomError.Text = "Username must be minimum 6 characters.";
-                return false;
-            }
-            if (this.PsbPassword.Password.Length < 6)
-            {
-                this.TxtBottomError.Text = "Password must be minimum 6 characters.";
-                return false;
+                result += "Password must be minimum 6 characters.\n";
+                success = false;
             }
 
-            return true;
+            if (result.Length > 0)
+            {
+                this.TxtBottomError.Text = result;
+            }
+            return success;
         }
 
         private async void BtnLogin_OnClick(object sender, RoutedEventArgs e)

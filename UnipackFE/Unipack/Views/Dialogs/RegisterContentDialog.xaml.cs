@@ -63,38 +63,43 @@ namespace Unipack.Views.Dialogs
             }
         }
 
-
         public bool Validate()
         {
+            string result = "";
+            bool success = true;
             if (this.TxtUsername.Text.Length == 0)
             {
-                this.TxtBottomError.Text = "Username is required.";
-                return false;
+                this.TxtUsername.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Username is required.\n";
+                success = false;
+            } else if (this.TxtUsername.Text.Length < 6)
+            {
+                this.TxtUsername.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Username must be minimum 6 characters.\n";
+                success = false;
             }
             if (this.PsbPassword.Password.Length == 0)
             {
-                this.TxtBottomError.Text = "Password is required.";
-                return false;
-            }
-            if (this.TxtUsername.Text.Length < 6)
+                this.PsbPassword.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Password is required.\n";
+                success = false;
+            } else if (this.PsbPassword.Password.Length < 6)
             {
-                this.TxtBottomError.Text = "Username must be minimum 6 characters.";
-                return false;
-            }
-            if (this.PsbPassword.Password.Length < 6)
-            {
-                this.TxtBottomError.Text = "Password must be minimum 6 characters.";
-                return false;
+                this.PsbPassword.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Password must be minimum 6 characters.\n";
+                success = false;
             }
             if (this.TxtFirstName.Text.Length == 0)
             {
-                this.TxtBottomError.Text = "First name is required.";
-                return false;
+                this.TxtFirstName.Foreground = new SolidColorBrush(Colors.Red);
+                result += "First name is required.\n";
+                success = false;
             }
             if (this.TxtLastName.Text.Length == 0)
             {
-                this.TxtBottomError.Text = "Last name is required.";
-                return false;
+                this.TxtLastName.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Last name is required.\n";
+                success = false;
             }
 
             if (this.TxtEmail.Text.Length > 0)
@@ -104,34 +109,48 @@ namespace Unipack.Views.Dialogs
                     var addr = new System.Net.Mail.MailAddress(this.TxtEmail.Text);
                     if (addr.Address != this.TxtEmail.Text)
                     {
-                        this.TxtBottomError.Text = "Please specify a valid email address, or none.";
-                        return false;
+                        this.TxtEmail.Foreground = new SolidColorBrush(Colors.Red);
+                        result += "Please specify a valid email address, or none.\n";
+                        success = false;
                     }
                 }
                 catch
                 {
-                    this.TxtBottomError.Text = "Please specify a valid email address, or none.";
-                    return false;
+                    this.TxtEmail.Foreground = new SolidColorBrush(Colors.Red);
+                    result += "Please specify a valid email address, or none.\n";
+                    success = false;
                 }
 
             }
             else
             {
-                this.TxtBottomError.Text = "Email is required.";
-                return false;
+                this.TxtEmail.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Email is required.\n";
+                success = false;
             }
 
             if (PsbPassword.Password != PsbPasswordConfirm.Password)
             {
-                this.TxtBottomError.Text = "The password confirmation doesn't match.";
-                return false;
+                this.PsbPasswordConfirm.Foreground = new SolidColorBrush(Colors.Red);
+                result += "The password confirmation doesn't match.\n";
+                success = false;
             }
 
-            return true;
+            if (result.Length > 0)
+            {
+                this.TxtBottomError.Text = result;
+            }
+            return success;
         }
 
         private async void BtnRegister_OnClick(object sender, RoutedEventArgs e)
         {
+            this.TxtFirstName.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtLastName.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtEmail.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtUsername.Foreground = new SolidColorBrush(Colors.Black);
+            this.PsbPassword.Foreground = new SolidColorBrush(Colors.Black);
+            this.PsbPasswordConfirm.Foreground = new SolidColorBrush(Colors.Black);
             this.TxtBottomError.Text = "";
             await Register();
         }

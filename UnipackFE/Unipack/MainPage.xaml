@@ -224,7 +224,7 @@
 
         <!-- Right Panel -->
         <Grid Grid.Column="1">
-            <Frame x:Name="mainFrame" FocusVisualPrimaryBrush="{x:Null}"/>
+            <Frame x:Name="MainFrame" FocusVisualPrimaryBrush="{x:Null}" Visibility="Collapsed"/>
             <FlipView x:Name="ImageGallery" Margin="10,69,10,0" Height="648" VerticalAlignment="Top" Background="#00000000">
 
                 <Image Source="Assets/welcome_screen_images/vac1.jpg" />

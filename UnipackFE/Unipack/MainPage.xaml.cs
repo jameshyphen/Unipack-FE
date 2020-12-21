@@ -65,6 +65,8 @@ namespace Unipack
                 this.BtnItems.Visibility = Visibility.Visible;
                 this.BtnVacations.Visibility = Visibility.Visible;
                 this.ImageGallery.Visibility = Visibility.Collapsed;
+                MainFrame.Navigate(typeof(VacationPage));
+                MainFrame.Visibility = Visibility.Visible;
             }
         }
 
@@ -89,6 +91,8 @@ namespace Unipack
                 this.BtnItems.Visibility = Visibility.Visible;
                 this.BtnVacations.Visibility = Visibility.Visible;
                 this.ImageGallery.Visibility = Visibility.Collapsed;
+                MainFrame.Navigate(typeof(VacationPage));
+                MainFrame.Visibility = Visibility.Visible;
             }
         }
 
@@ -116,23 +120,23 @@ namespace Unipack
             this.BtnItems.Visibility = Visibility.Collapsed;
             this.BtnVacations.Visibility = Visibility.Collapsed;
             this.ImageGallery.Visibility = Visibility.Visible;
-
+            MainFrame.Visibility = Visibility.Collapsed;
         }
 
         private void BtnVacations_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(typeof(VacationPage));
+            MainFrame.Navigate(typeof(VacationPage));
         }
 
         private void BtnItems_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(typeof(ItemPage));
+            MainFrame.Navigate(typeof(ItemPage));
 
         }
 
         private void BtnCategories_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(typeof(CategoryPage));
+            MainFrame.Navigate(typeof(CategoryPage));
 
         }
     }

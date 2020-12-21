@@ -9,12 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="250" Width="500">
 
     <Grid>
-        <TextBox x:Name="TxtUsername" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,38,0,0" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Username"/>
-        <PasswordBox x:Name="PsbPassword" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,85,0,0" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Password"/>
-        <TextBlock x:Name="TxtBottomError" HorizontalAlignment="Left" Margin="1,132,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
+        <TextBox x:Name="TxtUsername" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,32,0,0" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Username"/>
+        <PasswordBox x:Name="PsbPassword" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,79,0,0" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Password"/>
+        <TextBlock x:Name="TxtBottomError" HorizontalAlignment="Left" Margin="3,126,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
         <Button x:Name="BtnLogin"
                 RequestedTheme="Dark" 
-                Background="#FF00385F" Height="32" Margin="1,158,0,0" VerticalAlignment="Top" Width="194" 
+                Background="#FF00385F" Height="32" Margin="3,174,0,0" VerticalAlignment="Top" Width="194" 
                 Click="BtnLogin_OnClick"
         >
             <TextBlock 
@@ -42,11 +42,11 @@
                 </ResourceDictionary>
             </Button.Resources>
         </Button>
-        <Button x:Name="BtnCancel" Content="Back" Margin="237,158,0,0" VerticalAlignment="Top" Width="194" Click="BtnCancel_Click">
+        <Button x:Name="BtnCancel" Content="Back" Margin="239,174,0,0" VerticalAlignment="Top" Width="194" Click="BtnCancel_Click">
             <Button.KeyboardAccelerators>
                 <KeyboardAccelerator Key="Escape" />
             </Button.KeyboardAccelerators>
         </Button>
-        <TextBlock Text="Sign in" TextWrapping="Wrap" FontSize="20" Margin="0,0,375,170"/>
+        <TextBlock Text="Sign in" TextWrapping="Wrap" FontSize="20" Margin="0,0,375,176"/>
     </Grid>
 </ContentDialog>
