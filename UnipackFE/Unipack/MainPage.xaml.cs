@@ -61,12 +61,38 @@ namespace Unipack
                 this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
                 this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                this.ImageGallery.Visibility = Visibility.Collapsed;
             }
         }
-        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
-        { }
 
-            private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterContentDialog registerContentDialog = new RegisterContentDialog(_authenticationVM);
+            await registerContentDialog.ShowAsync();
+            if (!registerContentDialog.Success)
+                return;
+
+            if (this._authenticationVM.User != null)
+            {
+                string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
+                WelcomeDropDown.DataContext = WelcomeString;
+                this.BtnLogin.Visibility = Visibility.Collapsed;
+                this.BtnRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutLogin.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
+                this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                this.ImageGallery.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }
@@ -86,6 +112,11 @@ namespace Unipack
             this.MenuFlyOutAccountSettings.Visibility = Visibility.Collapsed;
             this.MenuFlyOutLogOut.Visibility = Visibility.Collapsed;
             WelcomeDropDown.DataContext = WelcomeString;
+            this.BtnCategories.Visibility = Visibility.Collapsed;
+            this.BtnItems.Visibility = Visibility.Collapsed;
+            this.BtnVacations.Visibility = Visibility.Collapsed;
+            this.ImageGallery.Visibility = Visibility.Visible;
+
         }
 
         private void BtnVacations_Click(object sender, RoutedEventArgs e)

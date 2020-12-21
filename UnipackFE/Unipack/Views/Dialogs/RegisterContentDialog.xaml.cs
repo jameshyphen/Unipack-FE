@@ -26,11 +26,11 @@ namespace Unipack.Views.Dialogs
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class LoginContentDialog : ContentDialog
+    public sealed partial class RegisterContentDialog : ContentDialog
     {
         public AuthenticationViewModel authVM { get; set; }
         public bool Success { get; set; }
-        public LoginContentDialog(AuthenticationViewModel authvm)
+        public RegisterContentDialog(AuthenticationViewModel authvm)
         {
             authVM = authvm;
             Success = false;
@@ -46,13 +46,13 @@ namespace Unipack.Views.Dialogs
             return this.PsbPassword.Password;
         }
 
-        public async Task Login()
+        public async Task Register()
         {
             try
             {
                 if (!Validate())
                     return;
-                await authVM.Login(new Login {Username = TxtUsername.Text, Password = PsbPassword.Password});
+                await authVM.Register(new Register {Username = TxtUsername.Text, Password = PsbPassword.Password, FirstName = TxtFirstName.Text, LastName = TxtLastName.Text, Email = TxtEmail.Text});
                 Success = true;
                 Hide();
             }
@@ -71,13 +71,11 @@ namespace Unipack.Views.Dialogs
                 this.TxtBottomError.Text = "Username is required.";
                 return false;
             }
-
             if (this.PsbPassword.Password.Length == 0)
             {
                 this.TxtBottomError.Text = "Password is required.";
                 return false;
             }
-   
             if (this.TxtUsername.Text.Length < 6)
             {
                 this.TxtBottomError.Text = "Username must be minimum 6 characters.";
@@ -88,14 +86,54 @@ namespace Unipack.Views.Dialogs
                 this.TxtBottomError.Text = "Password must be minimum 6 characters.";
                 return false;
             }
+            if (this.TxtFirstName.Text.Length == 0)
+            {
+                this.TxtBottomError.Text = "First name is required.";
+                return false;
+            }
+            if (this.TxtLastName.Text.Length == 0)
+            {
+                this.TxtBottomError.Text = "Last name is required.";
+                return false;
+            }
+
+            if (this.TxtEmail.Text.Length > 0)
+            {
+                try
+                {
+                    var addr = new System.Net.Mail.MailAddress(this.TxtEmail.Text);
+                    if (addr.Address != this.TxtEmail.Text)
+                    {
+                        this.TxtBottomError.Text = "Please specify a valid email address, or none.";
+                        return false;
+                    }
+                }
+                catch
+                {
+                    this.TxtBottomError.Text = "Please specify a valid email address, or none.";
+                    return false;
+                }
+
+            }
+            else
+            {
+                this.TxtBottomError.Text = "Email is required.";
+                return false;
+            }
+
+            if (PsbPassword.Password != PsbPasswordConfirm.Password)
+            {
+                this.TxtBottomError.Text = "The password confirmation doesn't match.";
+                return false;
+            }
 
             return true;
         }
 
-        private async void BtnLogin_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnRegister_OnClick(object sender, RoutedEventArgs e)
         {
             this.TxtBottomError.Text = "";
-            await Login();
+            await Register();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)
