@@ -54,6 +54,7 @@ namespace Unipack.Views.Dialogs
                     return;
                 await authVM.Login(new Login {Username = TxtUsername.Text, Password = PsbPassword.Password});
                 Success = true;
+                Hide();
             }
             catch (Exception e)
             {
@@ -91,11 +92,11 @@ namespace Unipack.Views.Dialogs
             return true;
         }
 
-        private void BtnLogin_OnClick(object sender, RoutedEventArgs e)
+        private async void BtnLogin_OnClick(object sender, RoutedEventArgs e)
         {
             this.TxtTopError.Text = "";
             this.TxtBottomError.Text = "";
-            Login().Wait();
+            await Login();
         }
 
         private void BtnCancel_Click(object sender, RoutedEventArgs e)

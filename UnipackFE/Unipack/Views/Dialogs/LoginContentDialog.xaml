@@ -15,31 +15,38 @@
         <TextBlock x:Name="TxtBottomError" HorizontalAlignment="Left" Margin="11,127,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
         <Button x:Name="BtnLogin"
                 RequestedTheme="Dark" 
-                Background="#FF00385F" Height="32" Margin="11,158,0,0" VerticalAlignment="Top" Width="194" 
+                Background="#FF00385F" Height="32" Margin="1,158,0,0" VerticalAlignment="Top" Width="194" 
                 Click="BtnLogin_OnClick"
         >
-                <TextBlock 
+            <TextBlock 
                     HorizontalAlignment="Left"
                     VerticalAlignment="Center"
                     Text="Login"
                 ></TextBlock>
-                <Button.Resources>
-                    <ResourceDictionary>
-                        <ResourceDictionary.ThemeDictionaries>
-                            <ResourceDictionary x:Key="Dark">
-                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+            <Button.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Enter" />
+            </Button.KeyboardAccelerators>
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Dark">
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
                             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FF004C81"/>
                             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FF007DD4"/>
-                            </ResourceDictionary>
-                            <ResourceDictionary x:Key="Light">
-                                <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
                             <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FF004C81"/>
                             <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FF007DD4"/>
-                            </ResourceDictionary>
-                        </ResourceDictionary.ThemeDictionaries>
-                    </ResourceDictionary>
-                </Button.Resources>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
         </Button>
-        <Button x:Name="BtnCancel" Content="Back" Margin="247,158,0,0" VerticalAlignment="Top" Width="194" Click="BtnCancel_Click"/>
+        <Button x:Name="BtnCancel" Content="Back" Margin="237,158,0,0" VerticalAlignment="Top" Width="194" Click="BtnCancel_Click">
+            <Button.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Escape" />
+            </Button.KeyboardAccelerators>
+        </Button>
     </Grid>
 </ContentDialog>

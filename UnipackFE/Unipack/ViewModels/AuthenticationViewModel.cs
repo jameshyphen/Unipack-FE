@@ -30,37 +30,29 @@ namespace Unipack.ViewModels
 
         public async Task Login(Login login)
         {
-            try
+            HttpClient client = new HttpClient();
+            var loginJson = JsonConvert.SerializeObject(login);
+            Console.WriteLine(loginJson);
+            var res = await client.PostAsync("http://www.hyphen-solutions.be/unipack/api/account/login",
+                new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
+            var result = res.Content.ReadAsStringAsync().Result;
+            var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
+
+            if (res.IsSuccessStatusCode)
             {
-
-                HttpClient client = new HttpClient();
-                var loginJson = JsonConvert.SerializeObject(login);
-                Console.WriteLine(loginJson);
-                var res = await client.PostAsync("http://www.hyphen-solutions.be/unipack/api/account/login",
-                    new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
-                var result = res.Content.ReadAsStringAsync().Result;
-                var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
-
-                if (res.IsSuccessStatusCode)
+                this.Token = auth.Token;
+                this.User = new User
                 {
-                    this.Token = auth.Token;
-                    this.User = new User
-                    {
-                        UserId = auth.UserDto.UserId,
-                        Username = auth.UserDto.Username,
-                        FirstName = auth.UserDto.FirstName,
-                        Email = auth.UserDto.Email,
-                        LastName = auth.UserDto.LastName
-                    };
-                }
-                else
-                {
-                    throw new Exception(auth.Message);
-                }
+                    UserId = auth.UserDto.UserId,
+                    Username = auth.UserDto.Username,
+                    FirstName = auth.UserDto.FirstName,
+                    Email = auth.UserDto.Email,
+                    LastName = auth.UserDto.LastName
+                };
             }
-            catch (Exception e)
+            else
             {
-                Console.WriteLine($"Something went wrong: {e}");
+                throw new Exception(auth.Message);
             }
         }
     }
