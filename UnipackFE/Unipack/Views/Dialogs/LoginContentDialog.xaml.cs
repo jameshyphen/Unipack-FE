@@ -71,21 +71,25 @@ namespace Unipack.Views.Dialogs
 
             if (this.TxtUsername.Text.Length == 0)
             {
+                this.TxtUsername.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Username is required.\n";
                 success = false;
             }
             else if (this.TxtUsername.Text.Length < 6)
             {
+                this.TxtUsername.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Username must be minimum 6 characters.\n";
                 success = false;
             }
 
             if (this.PsbPassword.Password.Length == 0)
             {
+                this.PsbPassword.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Password is required.\n";
                 success = false;
             } else if (this.PsbPassword.Password.Length < 6)
             {
+                this.PsbPassword.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Password must be minimum 6 characters.\n";
                 success = false;
             }
@@ -99,6 +103,8 @@ namespace Unipack.Views.Dialogs
 
         private async void BtnLogin_OnClick(object sender, RoutedEventArgs e)
         {
+            this.TxtUsername.Foreground = new SolidColorBrush(Colors.Black);
+            this.PsbPassword.Foreground = new SolidColorBrush(Colors.Black);
             this.TxtBottomError.Text = "";
             await Login();
         }
