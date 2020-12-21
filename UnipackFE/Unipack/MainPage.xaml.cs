@@ -63,10 +63,28 @@ namespace Unipack
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
             }
         }
-        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
-        { }
 
-            private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterContentDialog registerContentDialog = new RegisterContentDialog(_authenticationVM);
+            await registerContentDialog.ShowAsync();
+            if (!registerContentDialog.Success)
+                return;
+
+            if (this._authenticationVM.User != null)
+            {
+                string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
+                WelcomeDropDown.DataContext = WelcomeString;
+                this.BtnLogin.Visibility = Visibility.Collapsed;
+                this.BtnRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutLogin.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
+                this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
         {
 
         }

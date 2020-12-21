@@ -1,0 +1,56 @@
+﻿<ContentDialog
+    x:Class="Unipack.Views.Dialogs.RegisterContentDialog"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Unipack.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="500
+    " Width="500">
+
+    <Grid>
+        <TextBox x:Name="TxtUsername" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Username" Margin="0,209,0,0"/>
+        <PasswordBox x:Name="PsbPassword" VerticalContentAlignment="Center" HorizontalAlignment="Center"  Height="42" Width="430" FontSize="24" PlaceholderText="Password" Margin="0,256,0,119"/>
+        <PasswordBox x:Name="PsbPasswordConfirm" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="42" Width="430" FontSize="24" PlaceholderText="Confirm password" Margin="0,303,0,72"/>
+        <TextBlock x:Name="TxtBottomError" HorizontalAlignment="Left" Margin="1,357,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
+        <Button x:Name="BtnLogin"
+                RequestedTheme="Dark" 
+                Background="#FF00385F" Height="32" Margin="1,385,0,0" VerticalAlignment="Top" Width="194" 
+                Click="BtnRegister_OnClick"
+        >
+            <TextBlock 
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Text="Register"
+                ></TextBlock>
+            <Button.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Enter" />
+            </Button.KeyboardAccelerators>
+            <Button.Resources>
+                <ResourceDictionary>
+                    <ResourceDictionary.ThemeDictionaries>
+                        <ResourceDictionary x:Key="Dark">
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FF004C81"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FF007DD4"/>
+                        </ResourceDictionary>
+                        <ResourceDictionary x:Key="Light">
+                            <SolidColorBrush x:Key="ButtonForegroundPointerOver" Color="White"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPointerOver" Color="#FF004C81"/>
+                            <SolidColorBrush x:Key="ButtonBackgroundPressed" Color="#FF007DD4"/>
+                        </ResourceDictionary>
+                    </ResourceDictionary.ThemeDictionaries>
+                </ResourceDictionary>
+            </Button.Resources>
+        </Button>
+        <Button x:Name="BtnCancel" Content="Back" Margin="237,385,0,0" VerticalAlignment="Top" Width="194" Click="BtnCancel_Click">
+            <Button.KeyboardAccelerators>
+                <KeyboardAccelerator Key="Escape" />
+            </Button.KeyboardAccelerators>
+        </Button>
+        <TextBox x:Name="TxtFirstName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,17,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="First Name"/>
+        <TextBox x:Name="TxtLastName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,64,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Last Name"/>
+        <TextBox x:Name="TxtEmail" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Email" Margin="0,111,0,0"/>
+    </Grid>
+</ContentDialog>
