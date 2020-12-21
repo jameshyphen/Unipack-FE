@@ -154,6 +154,11 @@
     <Content Include="Assets\icons\icon_vacation.png" />
     <Content Include="Assets\logo_unipack.png" />
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
+    <Content Include="Assets\welcome_screen_images\vac1.jpg" />
+    <Content Include="Assets\welcome_screen_images\vac2.jpg" />
+    <Content Include="Assets\welcome_screen_images\vac3.jpg" />
+    <Content Include="Assets\welcome_screen_images\vac4.jpg" />
+    <Content Include="Assets\welcome_screen_images\vac5.jpg" />
     <Content Include="Properties\Default.rd.xml" />
     <Content Include="Assets\LockScreenLogo.scale-200.png" />
     <Content Include="Assets\SplashScreen.scale-200.png" />

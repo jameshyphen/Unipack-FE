@@ -68,7 +68,7 @@ namespace Unipack.Views.Dialogs
         {
             if (this.TxtUsername.Text.Length == 0)
             {
-                this.TxtTopError.Text = "Username is required.";
+                this.TxtBottomError.Text = "Username is required.";
                 return false;
             }
 
@@ -80,7 +80,7 @@ namespace Unipack.Views.Dialogs
    
             if (this.TxtUsername.Text.Length < 6)
             {
-                this.TxtTopError.Text = "Username must be minimum 6 characters.";
+                this.TxtBottomError.Text = "Username must be minimum 6 characters.";
                 return false;
             }
             if (this.PsbPassword.Password.Length < 6)
@@ -94,7 +94,6 @@ namespace Unipack.Views.Dialogs
 
         private async void BtnLogin_OnClick(object sender, RoutedEventArgs e)
         {
-            this.TxtTopError.Text = "";
             this.TxtBottomError.Text = "";
             await Login();
         }
@@ -103,5 +102,6 @@ namespace Unipack.Views.Dialogs
         {
             Hide();
         }
+
     }
 }

@@ -61,6 +61,10 @@ namespace Unipack
                 this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
                 this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                this.ImageGallery.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -81,6 +85,10 @@ namespace Unipack
                 this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
                 this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                this.ImageGallery.Visibility = Visibility.Collapsed;
             }
         }
 
@@ -104,6 +112,11 @@ namespace Unipack
             this.MenuFlyOutAccountSettings.Visibility = Visibility.Collapsed;
             this.MenuFlyOutLogOut.Visibility = Visibility.Collapsed;
             WelcomeDropDown.DataContext = WelcomeString;
+            this.BtnCategories.Visibility = Visibility.Collapsed;
+            this.BtnItems.Visibility = Visibility.Collapsed;
+            this.BtnVacations.Visibility = Visibility.Collapsed;
+            this.ImageGallery.Visibility = Visibility.Visible;
+
         }
 
         private void BtnVacations_Click(object sender, RoutedEventArgs e)

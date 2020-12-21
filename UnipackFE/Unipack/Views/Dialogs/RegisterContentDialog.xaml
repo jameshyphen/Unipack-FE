@@ -10,9 +10,9 @@
     " Width="500">
 
     <Grid>
-        <TextBox x:Name="TxtUsername" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Username" Margin="0,209,0,0"/>
-        <PasswordBox x:Name="PsbPassword" VerticalContentAlignment="Center" HorizontalAlignment="Center"  Height="42" Width="430" FontSize="24" PlaceholderText="Password" Margin="0,256,0,119"/>
-        <PasswordBox x:Name="PsbPasswordConfirm" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="42" Width="430" FontSize="24" PlaceholderText="Confirm password" Margin="0,303,0,72"/>
+        <TextBox x:Name="TxtUsername" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Username" Margin="0,209,0,0"/>
+        <PasswordBox x:Name="PsbPassword" VerticalContentAlignment="Center" HorizontalAlignment="Center"  Height="42" Width="430" FontSize="20" PlaceholderText="Password" Margin="0,256,0,119"/>
+        <PasswordBox x:Name="PsbPasswordConfirm" VerticalContentAlignment="Center" HorizontalAlignment="Center" Height="42" Width="430" FontSize="20" PlaceholderText="Confirm password" Margin="0,303,0,72"/>
         <TextBlock x:Name="TxtBottomError" HorizontalAlignment="Left" Margin="1,357,0,0" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
         <Button x:Name="BtnLogin"
                 RequestedTheme="Dark" 
@@ -49,8 +49,9 @@
                 <KeyboardAccelerator Key="Escape" />
             </Button.KeyboardAccelerators>
         </Button>
-        <TextBox x:Name="TxtFirstName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,17,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="First Name"/>
-        <TextBox x:Name="TxtLastName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,64,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Last Name"/>
-        <TextBox x:Name="TxtEmail" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="24" PlaceholderText="Email" Margin="0,111,0,0"/>
+        <TextBox x:Name="TxtFirstName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,46,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="First Name"/>
+        <TextBox x:Name="TxtLastName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Margin="0,93,0,0" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Last Name"/>
+        <TextBlock Text="Register" TextWrapping="Wrap" FontSize="20" Margin="0,0,363,396"/>
+        <TextBox x:Name="TxtEmail" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Email" Margin="0,140,0,0"/>
     </Grid>
 </ContentDialog>
