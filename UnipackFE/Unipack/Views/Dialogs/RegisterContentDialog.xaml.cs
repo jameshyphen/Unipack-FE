@@ -36,15 +36,6 @@ namespace Unipack.Views.Dialogs
             Success = false;
             this.InitializeComponent();
         }
-        public string GetUsername()
-        {
-            return this.TxtUsername.Text;
-        }
-
-        public string GetPassword()
-        {
-            return this.PsbPassword.Password;
-        }
 
         public async Task Register()
         {
@@ -52,7 +43,34 @@ namespace Unipack.Views.Dialogs
             {
                 if (!Validate())
                     return;
-                await authVM.Register(new Register {Username = TxtUsername.Text, Password = PsbPassword.Password, FirstName = TxtFirstName.Text, LastName = TxtLastName.Text, Email = TxtEmail.Text});
+                HttpClient client = new HttpClient();
+                var register = new Register
+                {
+                    Username = TxtUsername.Text, FirstName = TxtFirstName.Text, Email = TxtEmail.Text,
+                    LastName = TxtLastName.Text, Password = PsbPassword.Password
+                };
+                var registerJson = JsonConvert.SerializeObject(register);
+                var res = await client.PostAsync("https://localhost:44349/unipack/api/account/register",
+                    new StringContent(registerJson, System.Text.Encoding.UTF8, "application/json"));
+                var result = res.Content.ReadAsStringAsync().Result;
+                var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    authVM.Token = auth.Token;
+                    authVM.User = new User
+                    {
+                        UserId = auth.UserDto.UserId,
+                        Username = auth.UserDto.Username,
+                        FirstName = auth.UserDto.FirstName,
+                        Email = auth.UserDto.Email,
+                        LastName = auth.UserDto.LastName
+                    };
+                }
+                else
+                {
+                    throw new Exception(auth.Message);
+                }
                 Success = true;
                 Hide();
             }
@@ -159,6 +177,5 @@ namespace Unipack.Views.Dialogs
         {
             Hide();
         }
-
     }
 }

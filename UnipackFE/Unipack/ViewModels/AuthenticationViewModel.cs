@@ -22,59 +22,5 @@ namespace Unipack.ViewModels
             this.User = null;
             this.Token = null;
         }
-
-        public async Task Register(Register register)
-        {
-            HttpClient client = new HttpClient();
-            var registerJson = JsonConvert.SerializeObject(register);
-            var res = await client.PostAsync("http://www.hyphen-solutions.be/unipack/api/account/register",
-                new StringContent(registerJson, System.Text.Encoding.UTF8, "application/json"));
-            var result = res.Content.ReadAsStringAsync().Result;
-            var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
-
-            if (res.IsSuccessStatusCode)
-            {
-                this.Token = auth.Token;
-                this.User = new User
-                {
-                    UserId = auth.UserDto.UserId,
-                    Username = auth.UserDto.Username,
-                    FirstName = auth.UserDto.FirstName,
-                    Email = auth.UserDto.Email,
-                    LastName = auth.UserDto.LastName
-                };
-            }
-            else
-            {
-                throw new Exception(auth.Message);
-            }
-        }
-
-        public async Task Login(Login login)
-        {
-            HttpClient client = new HttpClient();
-            var loginJson = JsonConvert.SerializeObject(login);
-            var res = await client.PostAsync("http://www.hyphen-solutions.be/unipack/api/account/login",
-                new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
-            var result = res.Content.ReadAsStringAsync().Result;
-            var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
-
-            if (res.IsSuccessStatusCode)
-            {
-                this.Token = auth.Token;
-                this.User = new User
-                {
-                    UserId = auth.UserDto.UserId,
-                    Username = auth.UserDto.Username,
-                    FirstName = auth.UserDto.FirstName,
-                    Email = auth.UserDto.Email,
-                    LastName = auth.UserDto.LastName
-                };
-            }
-            else
-            {
-                throw new Exception(auth.Message);
-            }
-        }
     }
 }

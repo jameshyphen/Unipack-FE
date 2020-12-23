@@ -45,14 +45,37 @@ namespace Unipack.Views.Dialogs
         {
             return this.PsbPassword.Password;
         }
-
+        
         public async Task Login()
         {
             try
             {
                 if (!Validate())
                     return;
-                await authVM.Login(new Login {Username = TxtUsername.Text, Password = PsbPassword.Password});
+                HttpClient client = new HttpClient();
+                var login = new Login {Username = TxtUsername.Text, Password = PsbPassword.Password};
+                var loginJson = JsonConvert.SerializeObject(login);
+                var res = await client.PostAsync("https://localhost:44349/unipack/api/account/login",
+                    new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
+                var result = res.Content.ReadAsStringAsync().Result;
+                var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
+
+                if (res.IsSuccessStatusCode)
+                {
+                    authVM.Token = auth.Token;
+                    authVM.User = new User
+                    {
+                        UserId = auth.UserDto.UserId,
+                        Username = auth.UserDto.Username,
+                        FirstName = auth.UserDto.FirstName,
+                        Email = auth.UserDto.Email,
+                        LastName = auth.UserDto.LastName
+                    };
+                }
+                else
+                {
+                    throw new Exception(auth.Message);
+                }
                 Success = true;
                 Hide();
             }
