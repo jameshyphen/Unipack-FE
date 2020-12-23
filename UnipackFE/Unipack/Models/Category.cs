@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace Unipack.Models
 {
-    public class Category
+    class Category
     {
-        public int CategoryId { get; set; }
         public string Name { get; set; }
-        public User Author { get; set; }
-        public ICollection<Item> Items { get; set; }
         public DateTime AddedOn { get; set; }
+        public int NumberOfItems { get; set; }
     }
 }

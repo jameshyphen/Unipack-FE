@@ -9,6 +9,8 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using GalaSoft.MvvmLight.Command;
+using Unipack.DTOs;
+using Unipack.Views.Dialogs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -43,24 +45,12 @@ namespace Unipack
 
         private async void BtnLogin_Click(object sender, RoutedEventArgs e)
         {
-            LoginPage loginPage = new LoginPage();
-            ContentDialog noWifiDialog = new ContentDialog
-            {
-                Title = "Sign in",
-                Content = loginPage,
-                PrimaryButtonText = "Log in",
-                CloseButtonText = "Cancel",
-                PrimaryButtonCommand = new RelayCommand(async () =>
-                {
-                    await this._authenticationVM.Login(new Login
-                    {
-                        Username = loginPage.GetUsername(),
-                        Password = loginPage.GetPassword()
-                    });
-                }, () => loginPage.Validate()),
-            };
+            LoginContentDialog loginContentDialog = new LoginContentDialog(_authenticationVM);
 
-            await noWifiDialog.ShowAsync();
+            await loginContentDialog.ShowAsync();
+            if (!loginContentDialog.Success)
+                return;
+
             if (this._authenticationVM.User != null)
             {
                 string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
@@ -71,10 +61,41 @@ namespace Unipack
                 this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
                 this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
                 this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                //this.ImageGallery.Visibility = Visibility.Collapsed;
+                MainFrame.Navigate(typeof(VacationPage), _authenticationVM);
+                MainFrame.Visibility = Visibility.Visible;
             }
         }
 
-        
+        private async void BtnRegister_Click(object sender, RoutedEventArgs e)
+        {
+            RegisterContentDialog registerContentDialog = new RegisterContentDialog(_authenticationVM);
+            await registerContentDialog.ShowAsync();
+            if (!registerContentDialog.Success)
+                return;
+
+            if (this._authenticationVM.User != null)
+            {
+                string WelcomeString = $"Welcome, {_authenticationVM.User.FirstName}";
+                WelcomeDropDown.DataContext = WelcomeString;
+                this.BtnLogin.Visibility = Visibility.Collapsed;
+                this.BtnRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutLogin.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
+                this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
+                this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
+                this.BtnCategories.Visibility = Visibility.Visible;
+                this.BtnItems.Visibility = Visibility.Visible;
+                this.BtnVacations.Visibility = Visibility.Visible;
+                //this.ImageGallery.Visibility = Visibility.Collapsed;
+                MainFrame.Navigate(typeof(VacationPage), _authenticationVM);
+                MainFrame.Visibility = Visibility.Visible;
+            }
+        }
+
         private void BtnAccountSettings_Click(object sender, RoutedEventArgs e)
         {
 
@@ -95,31 +116,27 @@ namespace Unipack
             this.MenuFlyOutAccountSettings.Visibility = Visibility.Collapsed;
             this.MenuFlyOutLogOut.Visibility = Visibility.Collapsed;
             WelcomeDropDown.DataContext = WelcomeString;
+            this.BtnCategories.Visibility = Visibility.Collapsed;
+            this.BtnItems.Visibility = Visibility.Collapsed;
+            this.BtnVacations.Visibility = Visibility.Collapsed;
+            //this.ImageGallery.Visibility = Visibility.Visible;
+            MainFrame.Visibility = Visibility.Collapsed;
         }
-
-
-        //Uncomment these when pages have been made
 
         private void BtnVacations_Click(object sender, RoutedEventArgs e)
         {
-            mainFrame.Navigate(typeof(VacationPage));
+            MainFrame.Navigate(typeof(VacationPage), _authenticationVM);
         }
 
         private void BtnItems_Click(object sender, RoutedEventArgs e)
         {
-          // mainFrame.Navigate(typeof(ItemPage));
+            MainFrame.Navigate(typeof(ItemPage), _authenticationVM);
 
         }
 
         private void BtnCategories_Click(object sender, RoutedEventArgs e)
         {
-           // mainFrame.Navigate(typeof(CategoryPage));
-
-        }
-
-        private void BtnRegister_Click(object sender, RoutedEventArgs e)
-        {
-           //mainFrame.Navigate(typeof(RegisterPage));
+            MainFrame.Navigate(typeof(CategoryPage), _authenticationVM);
 
         }
     }

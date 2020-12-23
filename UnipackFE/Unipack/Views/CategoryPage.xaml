@@ -9,6 +9,23 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock Text="Categories" TextWrapping="Wrap" FontSize="48" Margin="84,58,1174,870"/>
+        <ListView x:Name="ListViewCategories" Margin="84,168,83,37" Background="#FFBDBDBD" >
+            <ListView.ItemTemplate>
 
+                <DataTemplate>
+
+
+
+                </DataTemplate>
+
+            </ListView.ItemTemplate>
+            <TextBlock Text="{Binding Name}"></TextBlock>
+
+            <TextBlock Text="{Binding AddedOn}"></TextBlock>
+
+            <TextBlock Text="{Binding NumberOfItems}"></TextBlock>
+        </ListView>
     </Grid>
+
 </Page>

@@ -18,8 +18,6 @@
         <Border Grid.Column ="1" Grid.RowSpan="12" Background="#FF001F5D" BorderBrush="White"/>
 
         <!-- Left panel -->
-
-
         <Grid 
             Column="0"
             >
@@ -70,7 +68,7 @@
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
                 Click="BtnVacations_Click"
-                Style="{ThemeResource ButtonRevealStyle}"
+                Style="{ThemeResource ButtonRevealStyle}" Visibility="Collapsed"
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -100,7 +98,7 @@
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
                 Click="BtnItems_Click"
-                Style="{ThemeResource ButtonRevealStyle}"        
+                Style="{ThemeResource ButtonRevealStyle}" Visibility="Collapsed"        
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -131,7 +129,7 @@
                 RequestedTheme="Dark" 
                 Background="#FF00385F" Height="50"
                 Click="BtnCategories_Click"
-                Style="{ThemeResource ButtonRevealStyle}"        
+                Style="{ThemeResource ButtonRevealStyle}" Visibility="Collapsed"        
             >
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -223,9 +221,19 @@
                 </Button>
             </StackPanel>
         </Grid>
+
         <!-- Right Panel -->
         <Grid Grid.Column="1">
-            <Frame x:Name="mainFrame"/>
+            <Frame x:Name="MainFrame" FocusVisualPrimaryBrush="{x:Null}"/>
+            <!--<FlipView x:Name="ImageGallery" Margin="10,69,10,0" Height="648" VerticalAlignment="Top" Background="#00000000">
+
+                <Image Source="Assets/welcome_screen_images/vac1.jpg" />
+                <Image Source="Assets/welcome_screen_images/vac2.jpg" />
+                <Image Source="Assets/welcome_screen_images/vac3.jpg" />
+                <Image Source="Assets/welcome_screen_images/vac4.jpg" />
+                <Image Source="Assets/welcome_screen_images/vac5.jpg" />
+            </FlipView>-->
+
         </Grid>
     </Grid>
 </Page>
