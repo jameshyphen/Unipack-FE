@@ -25,7 +25,7 @@ namespace Unipack.Views
     /// </summary>
     public sealed partial class CategoryPage : Page
     {
-        private AuthenticationViewModel authenticationVm;
+        private AuthenticationViewModel authenticationVM;
 
         public CategoryPage()
         {
@@ -48,7 +48,7 @@ namespace Unipack.Views
         {
             base.OnNavigatedTo(e);
 
-            authenticationVm = (AuthenticationViewModel)e.Parameter;
+            authenticationVM = (AuthenticationViewModel)e.Parameter;
         }
     }
 }

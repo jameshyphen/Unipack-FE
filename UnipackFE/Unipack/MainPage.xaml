@@ -225,14 +225,14 @@
         <!-- Right Panel -->
         <Grid Grid.Column="1">
             <Frame x:Name="MainFrame" FocusVisualPrimaryBrush="{x:Null}"/>
-            <!--<FlipView x:Name="ImageGallery" Margin="10,69,10,0" Height="648" VerticalAlignment="Top" Background="#00000000">
+            <FlipView x:Name="ImageGallery" Margin="10,69,10,0" Height="648" VerticalAlignment="Top" Background="#00000000">
 
                 <Image Source="Assets/welcome_screen_images/vac1.jpg" />
                 <Image Source="Assets/welcome_screen_images/vac2.jpg" />
                 <Image Source="Assets/welcome_screen_images/vac3.jpg" />
                 <Image Source="Assets/welcome_screen_images/vac4.jpg" />
                 <Image Source="Assets/welcome_screen_images/vac5.jpg" />
-            </FlipView>-->
+            </FlipView>
 
         </Grid>
     </Grid>
