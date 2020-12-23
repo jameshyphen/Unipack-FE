@@ -9,23 +9,24 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <TextBlock Text="Categories" TextWrapping="Wrap" FontSize="48" Margin="84,58,1174,870"/>
-        <ListView x:Name="ListViewCategories" Margin="84,168,83,37" Background="#FFBDBDBD" >
-            <ListView.ItemTemplate>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.1*"/>
+            <RowDefinition Height="0.8*"/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Row="0" Text="Categories" TextWrapping="Wrap" FontSize="48"/>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.25*"/>
+                <ColumnDefinition Width="0.75*"/>
+            </Grid.ColumnDefinitions>
+            <Button Grid.Column="0" Content="Add Category" FontSize="50" HorizontalAlignment="Center" Height="88" Width="460"/>
+            <TextBox Grid.Column="1" HorizontalAlignment="Center" Text="Search. . ." FontSize="50" TextWrapping="Wrap" VerticalAlignment="Center" Width="1419" Height="89"/>
+        </Grid>
+        <GridView Grid.Row="2">
+            
+        </GridView>
 
-                <DataTemplate>
-
-
-
-                </DataTemplate>
-
-            </ListView.ItemTemplate>
-            <TextBlock Text="{Binding Name}"></TextBlock>
-
-            <TextBlock Text="{Binding AddedOn}"></TextBlock>
-
-            <TextBlock Text="{Binding NumberOfItems}"></TextBlock>
-        </ListView>
     </Grid>
 
 </Page>
