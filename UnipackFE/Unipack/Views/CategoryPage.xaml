@@ -23,8 +23,13 @@
             <Button Grid.Column="0" Content="Add Category" FontSize="50" HorizontalAlignment="Center" Height="88" Width="460"/>
             <TextBox Grid.Column="1" HorizontalAlignment="Center" Text="Search. . ." FontSize="50" TextWrapping="Wrap" VerticalAlignment="Center" Width="1419" Height="89"/>
         </Grid>
-        <GridView Grid.Row="2">
-            
+        <GridView Grid.Row="2" x:Name="CategoryGrid" ItemsSource="{x:Bind categories}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True">
+            <GridView.ItemTemplate>
+                <DataTemplate x:DataType="local:CategoryPage">
+                    <TextBlock Name="AlbumBlock" Foreground="Black" FontWeight="Normal" FontSize="15" Margin="5,0,5,0"
+                                Text="{x:Bind Name}" HorizontalAlignment="Left" VerticalAlignment="Center" Width="100"/>
+                </DataTemplate>
+            </GridView.ItemTemplate>
         </GridView>
 
     </Grid>

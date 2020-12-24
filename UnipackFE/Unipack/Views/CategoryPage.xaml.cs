@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Unipack.Models;
 using Unipack.ViewModels;
+using System.Net.Http;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -26,22 +27,27 @@ namespace Unipack.Views
     public sealed partial class CategoryPage : Page
     {
         private AuthenticationViewModel authenticationVM;
+        public ObservableCollection<Category> categories { get; set; }
 
         public CategoryPage()
         {
             this.InitializeComponent();
 
-            ObservableCollection<Category> dataList = new ObservableCollection<Category>();
+            categories = new ObservableCollection<Category>();
 
-            Category c1 = new Category() {AddedOn = DateTime.Now, Name = "Tech", NumberOfItems = 12};
-            Category c2 = new Category() {AddedOn = DateTime.Now, Name = "Books", NumberOfItems = 31 };
-            Category c3 = new Category() {AddedOn = DateTime.Now, Name = "Food", NumberOfItems = 15 };
+            AddCategory(new Category() {AddedOn = DateTime.Now, Name = "Tech", NumberOfItems = 12});
+            AddCategory(new Category() {AddedOn = DateTime.Now, Name = "Books", NumberOfItems = 31 });
+            AddCategory(new Category() {AddedOn = DateTime.Now, Name = "Food", NumberOfItems = 15 });
+        }
 
-            dataList.Add(c1);
-            dataList.Add(c2);
-            dataList.Add(c3);
+        public void AddCategory(Category cat)
+        {
+            categories.Add(cat);
+        }
 
-            ListViewCategories.ItemsSource = dataList;
+        public void Clear()
+        {
+            categories.Clear();
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
