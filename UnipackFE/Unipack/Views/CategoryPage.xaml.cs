@@ -37,6 +37,8 @@ namespace Unipack.Views
             Category c2 = new Category() {AddedOn = DateTime.Now, Name = "Books", NumberOfItems = 31 };
             Category c3 = new Category() {AddedOn = DateTime.Now, Name = "Food", NumberOfItems = 15 };
 
+            // Test
+
             dataList.Add(c1);
             dataList.Add(c2);
             dataList.Add(c3);
