@@ -130,8 +130,15 @@
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
     <Compile Include="Views\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CategoryAddContentDialog.xaml.cs">
+      <DependentUpon>CategoryAddContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CategoryEditContentDialog.xaml.cs">
+      <DependentUpon>CategoryEditContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
       <DependentUpon>RegisterContentDialog.xaml</DependentUpon>
@@ -178,6 +185,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CategoryAddContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CategoryEditContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
