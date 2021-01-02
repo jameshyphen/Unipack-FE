@@ -30,8 +30,8 @@ namespace Unipack.Views
     {
         
         public AuthenticationViewModel authVM { get; set; }
+        ObservableCollection<Vacation> Vacations = new ObservableCollection<Vacation>(); //move this to viewModel later
 
-        ObservableCollection<Vacation> Vacations = new ObservableCollection<Vacation>();
         public VacationPage()
         {
             this.InitializeComponent();
@@ -45,9 +45,9 @@ namespace Unipack.Views
             //HttpClient client = new HttpClient();
             //var json = await client.GetStringAsync(new Uri("http://195.201.101.209/unipack/api/vacation"));
             //var vacationList = JsonConvert.DeserializeObject<ICollection<Vacation>>(json);
-            //vacationsListView.ItemsSource = vacationList;
+            //vacationsGridView.ItemsSource = vacationList;
 
-            
+            //TestData
             VacationList l1 = new VacationList() { };
             VacationList l2 = new VacationList() { };
 
@@ -64,7 +64,7 @@ namespace Unipack.Views
 
         private void vacationsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Vacation selectedVacation = (Vacation)vacationsListView.SelectedItem;
+            Vacation selectedVacation = (Vacation)vacationsGridView.SelectedItem;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -72,5 +72,11 @@ namespace Unipack.Views
             base.OnNavigatedTo(e);
             authVM = (AuthenticationViewModel)e.Parameter;
         }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
     }
 }

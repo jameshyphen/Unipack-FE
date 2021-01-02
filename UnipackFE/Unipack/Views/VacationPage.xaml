@@ -12,37 +12,50 @@
 
 
 
-    <StackPanel Orientation="Vertical">
-        <TextBlock  Text="Vacations" TextWrapping="Wrap" FontSize="48" Margin="84,58,1174,870"/>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
 
-        <GridView  x:Name="vacationsListView" ItemsSource="{x:Bind Vacations}" 
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Vacations" TextWrapping="Wrap" FontSize="48" Margin="50,0,0,0"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Add Vacation" Margin="50,0,0,0" FontSize="20" Click="AddButton_Click" />
+        
+        <GridView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="vacationsGridView" ItemsSource="{x:Bind Vacations}" 
                    FlowDirection="LeftToRight" SelectionMode="None" 
                    IsItemClickEnabled="True" ItemClick="vacationsListView_ItemClick"
                    >
             <GridView.ItemTemplate>
                     <DataTemplate x:DataType="local:Vacation">
-                    <StackPanel Orientation="Horizontal">
-                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE709;"/>
-                            <TextBlock Text="{x:Bind Name}"/>
-                        <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="Departure" />
-                            <TextBlock  Text="{x:Bind DateDeparture.Date}" />
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE709;"/>
+                        <TextBlock Text="{x:Bind Name}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="Departure " />
+                                <TextBlock  Text="{x:Bind DateDeparture.ToShortDateString()}" Margin="10,0,0,0" />
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="Return"/>
-                            <TextBlock  Text="{x:Bind DateReturn.Date}"/>
+                            <TextBlock  Text="Return "/>
+                                <TextBlock  Text="{x:Bind DateReturn.ToShortDateString()}" Margin="10,0,0,0"/>
                         </StackPanel>
                         
                         <StackPanel Orientation="Horizontal">
-                            <TextBlock  Text="{x:Bind VacationLists.Count}"/>
-                            <TextBlock Text="VacationLists"/>
-                        </StackPanel>
+                            <TextBlock Text="To Do Lists: "/>
+                                <TextBlock  Text="{x:Bind VacationLists.Count}" Margin="10,0,0,0"/>
+
+                            </StackPanel>
                         </StackPanel>
                     </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>
                 </GridView>
-        </StackPanel>
+        </Grid>
 
 </Page>
