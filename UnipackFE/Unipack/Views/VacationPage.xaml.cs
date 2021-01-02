@@ -1,8 +1,12 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unipack.Models;
+using Unipack.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +26,23 @@ namespace Unipack.Views
     /// </summary>
     public sealed partial class VacationPage : Page
     {
-        public VacationPage()
+        public AuthenticationViewModel authVM { get; set; }
+        public bool Success { get; set; }
+        public VacationPage(AuthenticationViewModel authvm)
         {
+            authVM = authvm;
+            Success = false;
             this.InitializeComponent();
+        }
+
+        public async void getData()
+        {
+
+            HttpClient client = new HttpClient();
+            var json = await client.GetStringAsync(new Uri("http://195.201.101.209/unipack/api/vacation"));
+            var vacationList = JsonConvert.DeserializeObject<ICollection<Vacation>>(json);
+            vacationsListView.ItemsSource = vacationList;
+
         }
     }
 }

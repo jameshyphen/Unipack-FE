@@ -2,14 +2,44 @@
     x:Class="Unipack.Views.VacationPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Unipack.Views"
+    xmlns:local="using:Unipack.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    mc:Ignorable="d">
 
-    <Grid>
-        <Button Content="Button" Margin="0,325,0,0" VerticalAlignment="Top" Height="341" Width="545" HorizontalAlignment="Center"/>
+    <StackPanel Orientation="Vertical">
+        <TextBlock Text="vacations"/>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" Text="Departure" />
+            <TextBlock Grid.Row="0" Grid.Column="2" Text="Return"/>
+            <TextBlock Grid.Row="0" Grid.Column="3" Text="Total Lists"/>
 
-    </Grid>
+            <StackPanel Grid.Row="1" Grid.ColumnSpan="4" Orientation="Vertical">
+                <ListView  x:Name="vacationsListView">
+                    <ListView.ItemTemplate>
+                        <DataTemplate x:DataType="local:Vacation">
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock Text="{x:Bind Name}"/>
+                                <TextBlock  Text="{x:Bind DateDeparture.Date}" />
+                                <TextBlock  Text="{x:Bind DateReturn.Date}"/>
+                                <TextBlock  Text="{x:Bind VacationLists.Count}"/>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </StackPanel>
+        </Grid>
+
+    </StackPanel>
 </Page>
