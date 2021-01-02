@@ -55,7 +55,7 @@ namespace Unipack.Views.Dialogs
                 HttpClient client = new HttpClient();
                 var login = new Login {Username = TxtUsername.Text, Password = PsbPassword.Password};
                 var loginJson = JsonConvert.SerializeObject(login);
-                var res = await client.PostAsync("https://localhost:44349/unipack/api/account/login",
+                var res = await client.PostAsync("http://hyphen-solutions.be/unipack/api/account/login",
                     new StringContent(loginJson, System.Text.Encoding.UTF8, "application/json"));
                 var result = res.Content.ReadAsStringAsync().Result;
                 var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
