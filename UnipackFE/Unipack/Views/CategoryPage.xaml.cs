@@ -64,7 +64,6 @@ namespace Unipack.Views
             await addContentDialog.ShowAsync();
             if (!addContentDialog.Success)
                 return;
-
         }
         public void DeleteCategory(string cat)
         {
