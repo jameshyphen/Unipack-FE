@@ -20,6 +20,7 @@ using Unipack.Views.Dialogs;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
+using System.Security.Cryptography.X509Certificates;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -38,15 +39,6 @@ namespace Unipack.Views
             InitializeCategories();
             CategoryGrid.DataContext = _categoryVM.categories;
             DeleteCommand = new RelayCommand<string>((param) => DeleteCategory(param));
-        }
-
-        public CategoryPage(AuthenticationViewModel auth)
-        {
-            this.InitializeComponent();
-            _categoryVM = new CategoryViewModel();
-            InitializeCategories();
-            CategoryGrid.DataContext = _categoryVM.categories;
-            _authenticationVM = auth;
         }
 
         private void InitializeCategories()
@@ -69,6 +61,7 @@ namespace Unipack.Views
         {
             _categoryVM.DeleteCategory(GetCategoryByName(cat));
             //TODO hier pai call doen voor categorie te verwijderen
+
         }
         private Category GetCategoryByName(string name)
         {
@@ -102,7 +95,22 @@ namespace Unipack.Views
         private void CategoryGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             Category category = (Category) e.ClickedItem;
-            //TODO doe hier iets mee
+            DetailParameters param = new DetailParameters(_authenticationVM, category);
+
+            page.Navigate(typeof(CategoryDetailPage), param);
         }
+    }
+}
+
+public class DetailParameters
+{
+
+    public AuthenticationViewModel _authenticationVM { get; set; }
+    public Category _category { get; set; }
+
+    public DetailParameters(AuthenticationViewModel AVM, Category cat)
+    {
+        _authenticationVM = AVM;
+        _category = cat;
     }
 }
