@@ -40,12 +40,8 @@ namespace Unipack.Views
             DeleteCommand = new RelayCommand<string>((param) => DeleteCategory(param));
         }
 
-        public CategoryPage(AuthenticationViewModel auth)
+        public CategoryPage(AuthenticationViewModel auth) : this()
         {
-            this.InitializeComponent();
-            _categoryVM = new CategoryViewModel();
-            InitializeCategories();
-            CategoryGrid.DataContext = _categoryVM.categories;
             _authenticationVM = auth;
         }
 
