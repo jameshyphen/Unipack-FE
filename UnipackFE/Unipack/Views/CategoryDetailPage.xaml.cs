@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using Unipack.Models;
 using Unipack.ViewModels;
+using Unipack.Views.Dialogs;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,11 +29,27 @@ namespace Unipack.Views
 
         private void InitializeCategoryDetails(Category cat)
         {
+            _categoryDVM = new CategoryDetailViewModel() {category = cat};
             //TODO hier api call doen voor ophalen
-            _categoryDVM.AddItem(new Item());
+            header.Text = _categoryDVM.category.Name;
+            ItemGrid.DataContext = _categoryDVM.items;
+        }
 
+        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        {
+        }
 
-            //ItemGrid.DataContext = _categoryDVM.items;
+        public void ItemGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void ItemGrid_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            Category category = (Category)e.ClickedItem;
+            DetailParameters param = new DetailParameters(_authenticationVM, category);
+
+            page.Navigate(typeof(CategoryDetailPage), param);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GalaSoft.MvvmLight;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace Unipack.ViewModels
     class CategoryDetailViewModel
     {
         public ObservableCollection<Item> items { get; set; } = new ObservableCollection<Item>();
+        public Category category { get; set; }
         public User User { get; set; }
 
         public void AddItem(Item item)
