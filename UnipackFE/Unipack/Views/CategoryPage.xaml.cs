@@ -21,6 +21,7 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using System.Security.Cryptography.X509Certificates;
+using Unipack.Models.Commands;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -30,15 +31,16 @@ namespace Unipack.Views
     {
         private AuthenticationViewModel _authenticationVM;
         private CategoryViewModel _categoryVM;
-        public RelayCommand<string> DeleteCommand;
+        public ObservableCollection<Category> categories { get; set; } = new ObservableCollection<Category>();
+        private DeleteCategoryCommand DeleteCommand { get; set; }
 
         public CategoryPage()
         {
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
             InitializeCategories();
-            CategoryGrid.DataContext = _categoryVM.categories;
-            DeleteCommand = new RelayCommand<string>((param) => DeleteCategory(param));
+            DeleteCommand = new DeleteCategoryCommand(_categoryVM);
+
         }
 
         private void InitializeCategories()
@@ -47,6 +49,9 @@ namespace Unipack.Views
             _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Tech", NumberOfItems = 12 });
             _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Books", NumberOfItems = 31 });
             _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Food", NumberOfItems = 15 });
+
+            categories = _categoryVM.categories;
+            CategoryGrid.DataContext = categories;
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -56,23 +61,13 @@ namespace Unipack.Views
             await addContentDialog.ShowAsync();
             if (!addContentDialog.Success)
                 return;
+            CategoryGrid.DataContext = _categoryVM.categories;
         }
         public void DeleteCategory(string cat)
         {
-            _categoryVM.DeleteCategory(GetCategoryByName(cat));
+            _categoryVM.DeleteCategory(cat);
             //TODO hier pai call doen voor categorie te verwijderen
 
-        }
-        private Category GetCategoryByName(string name)
-        {
-            try
-            {
-                return _categoryVM.categories.First(x => x.Name.Equals(name));
-            }
-            catch
-            {
-                return null;
-            }
         }
 
         public void Clear()
@@ -99,6 +94,12 @@ namespace Unipack.Views
 
             page.Navigate(typeof(CategoryDetailPage), param);
         }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            categories = _categoryVM.categories;
+            CategoryGrid.DataContext = new ObservableCollection<Category>(categories.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
+        }
     }
 }
 
@@ -114,3 +115,4 @@ public class DetailParameters
         _category = cat;
     }
 }
+
