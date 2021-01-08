@@ -66,12 +66,15 @@ namespace Unipack.Views
                 return;
             CategoryGrid.DataContext = _categoryVM.categories;
         }
-        public async void DeleteCategory(int id)
-        {
-            _categoryVM.DeleteCategory(id);
-            await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/category/"+id);
-        }
 
+        public async void DeleteCategory(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var cat = (Category)button.DataContext;
+
+            _categoryVM.DeleteCategory(cat.Id);
+            await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/category/" + cat.Id);
+        }
         public void Clear()
         {
             _categoryVM.Clear();
