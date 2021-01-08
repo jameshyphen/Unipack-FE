@@ -19,16 +19,15 @@ namespace Unipack.ViewModels
             categories.Add(cat);
         }
 
-        public void DeleteCategory(string categoryName)
+        public void DeleteCategory(int id)
         {
-            Category cat = GetCategoryByName(categoryName);
+            Category cat = GetCategoryById(id);
             categories.Remove(cat);
-            //TODO hier pai call doen voor categorie te verwijderen
         }
         
-        private Category GetCategoryByName(string name)
+        private Category GetCategoryById(int id)
         {
-            return categories.First(c => c.Name.Equals(name));
+            return categories.First(c => c.Id == id);
         }
 
         public void Clear()

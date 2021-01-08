@@ -27,18 +27,6 @@ namespace Unipack
             _authenticationVM = new AuthenticationViewModel();
             this.InitializeComponent();
             this.initUserless();
-            //this.BtnLogin.Visibility = Visibility.Collapsed;
-            //this.BtnRegister.Visibility = Visibility.Collapsed;
-            //this.MenuFlyOutLogin.Visibility = Visibility.Collapsed;
-            //this.MenuFlyOutRegister.Visibility = Visibility.Collapsed;
-            //this.MenuFlyOutAccountSettings.Visibility = Visibility.Visible;
-            //this.MenuFlyOutLogOut.Visibility = Visibility.Visible;
-            //this.BtnCategories.Visibility = Visibility.Visible;
-            //this.BtnItems.Visibility = Visibility.Visible;
-            //this.BtnVacations.Visibility = Visibility.Visible;
-            //this.ImageGallery.Visibility = Visibility.Collapsed;
-            //MainFrame.Navigate(typeof(CategoryPage), _authenticationVM);
-            //MainFrame.Visibility = Visibility.Visible;
         }
 
         private void OnPointEnter(object sender, PointerRoutedEventArgs e)

@@ -27,7 +27,7 @@ namespace Unipack.Models.Commands
         public void Execute(object parameter)
         {
             if(CanExecute(parameter))
-                _viewModel.DeleteCategory(parameter as string);
+                _viewModel.DeleteCategory((int) parameter);
         }
     }
 }

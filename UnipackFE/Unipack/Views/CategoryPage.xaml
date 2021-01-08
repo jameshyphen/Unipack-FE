@@ -34,7 +34,7 @@
                             <TextBlock FontSize="25" Text="{Binding NumberOfItems}" Margin="2"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                                <Button Content="Delete" Name="Delete" Command="{Binding DeleteCategoryCommand}" CommandParameter="{Binding Name}" HorizontalAlignment="Center"/>
+                                <Button Content="Delete" Name="Delete" Command="{Binding DeleteCategoryCommand}" CommandParameter="{Binding Id}" HorizontalAlignment="Center"/>
                             <Button Content="Edit" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>

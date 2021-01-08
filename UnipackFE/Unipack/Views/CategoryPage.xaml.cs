@@ -22,6 +22,8 @@ using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using System.Security.Cryptography.X509Certificates;
 using Unipack.Models.Commands;
+using Newtonsoft.Json;
+using Unipack.DTOs;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
@@ -31,27 +33,28 @@ namespace Unipack.Views
     {
         private AuthenticationViewModel _authenticationVM;
         private CategoryViewModel _categoryVM;
-        public ObservableCollection<Category> categories { get; set; } = new ObservableCollection<Category>();
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
         private DeleteCategoryCommand DeleteCommand { get; set; }
 
+        public CategoryPage(AuthenticationViewModel vm) : this()
+        {
+            _authenticationVM = vm;
+        }
         public CategoryPage()
         {
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
-            InitializeCategories();
             DeleteCommand = new DeleteCategoryCommand(_categoryVM);
-
         }
 
-        private void InitializeCategories()
+        private async void InitializeCategories()
         {
-            //TODO hier api call doen voor alle categoriën te adden & demo data verwijderen
-            _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Tech", NumberOfItems = 12 });
-            _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Books", NumberOfItems = 31 });
-            _categoryVM.AddCategory(new Category() { AddedOn = DateTime.Now, Name = "Food", NumberOfItems = 15 });
+            var res = await _authenticationVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category");
+            var stringRes = res.Content.ReadAsStringAsync().Result;
+            var categories = JsonConvert.DeserializeObject<List<CategoryDto>>(stringRes);
 
-            categories = _categoryVM.categories;
-            CategoryGrid.DataContext = categories;
+            categories.ForEach(c => _categoryVM.AddCategory(new Category { Id = c.CategoryId, AddedOn = c.AddedOn, Name = c.Name, NumberOfItems = 0 }));
+            CategoryGrid.DataContext = _categoryVM.categories;
         }
 
         private async void BtnAdd_Click(object sender, RoutedEventArgs e)
@@ -63,11 +66,10 @@ namespace Unipack.Views
                 return;
             CategoryGrid.DataContext = _categoryVM.categories;
         }
-        public void DeleteCategory(string cat)
+        public async void DeleteCategory(int id)
         {
-            _categoryVM.DeleteCategory(cat);
-            //TODO hier pai call doen voor categorie te verwijderen
-
+            _categoryVM.DeleteCategory(id);
+            await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/category/"+id);
         }
 
         public void Clear()
@@ -80,6 +82,7 @@ namespace Unipack.Views
             base.OnNavigatedTo(e);
 
             _authenticationVM = (AuthenticationViewModel)e.Parameter;
+            InitializeCategories();
         }
 
         public void CategoryGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -97,8 +100,8 @@ namespace Unipack.Views
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            categories = _categoryVM.categories;
-            CategoryGrid.DataContext = new ObservableCollection<Category>(categories.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
+            Categories = _categoryVM.categories;
+            CategoryGrid.DataContext = new ObservableCollection<Category>(Categories.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
         }
     }
 }
