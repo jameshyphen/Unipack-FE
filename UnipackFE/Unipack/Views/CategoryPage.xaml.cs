@@ -21,7 +21,6 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using GalaSoft.MvvmLight.Command;
 using System.Security.Cryptography.X509Certificates;
-using Unipack.Models.Commands;
 using Newtonsoft.Json;
 using Unipack.DTOs;
 
@@ -34,7 +33,6 @@ namespace Unipack.Views
         private AuthenticationViewModel _authenticationVM;
         private CategoryViewModel _categoryVM;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
-        private DeleteCategoryCommand DeleteCommand { get; set; }
 
         public CategoryPage(AuthenticationViewModel vm) : this()
         {
@@ -44,7 +42,6 @@ namespace Unipack.Views
         {
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
-            DeleteCommand = new DeleteCategoryCommand(_categoryVM);
         }
 
         private async void InitializeCategories()
@@ -64,7 +61,7 @@ namespace Unipack.Views
             await addContentDialog.ShowAsync();
             if (!addContentDialog.Success)
                 return;
-            CategoryGrid.DataContext = _categoryVM.categories;
+            Categories = _categoryVM.categories;
         }
 
         public async void DeleteCategory(object sender, RoutedEventArgs e)
@@ -75,6 +72,21 @@ namespace Unipack.Views
             _categoryVM.DeleteCategory(cat.Id);
             await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/category/" + cat.Id);
         }
+
+        public async void EditCategory(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var cat = (Category)button.DataContext;
+
+            CategoryEditContentDialog editContentDialog = new CategoryEditContentDialog(_authenticationVM, _categoryVM, cat);
+
+            await editContentDialog.ShowAsync();
+            if (!editContentDialog.Success)
+                return;
+            Categories = _categoryVM.categories;
+
+        }
+
         public void Clear()
         {
             _categoryVM.Clear();
