@@ -18,10 +18,12 @@
             <Grid Grid.Row="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="0.25*"/>
-                    <ColumnDefinition Width="0.75*"/>
+                    <ColumnDefinition Width="0.25*"/>
+                    <ColumnDefinition Width="0.50*"/>
                 </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Add Item" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Center" Text="Search. . ." FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <Button Grid.Column="0" Content="Add existing item" FontSize="25" Click="BtnAddExisting_Click" HorizontalAlignment="Center"/>
+                <Button Grid.Column="1" Content="Add new item" FontSize="25" Click="BtnAddNew_Click" HorizontalAlignment="Center"/>
+                <TextBox Grid.Column="2" HorizontalAlignment="Center" Text="Search. . ." FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </Grid>
             <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="ItemGrid_ItemClick" SelectionChanged="ItemGrid_SelectionChanged">
                 <GridView.ItemTemplate>

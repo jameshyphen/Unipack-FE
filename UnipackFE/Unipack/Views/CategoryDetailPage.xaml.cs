@@ -1,11 +1,15 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unipack.DTOs;
+using Unipack.Enums;
 using Unipack.Models;
 using Unipack.ViewModels;
 using Unipack.Views.Dialogs;
+using Unipack.Views.Dialogs.CategoryDetail;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,29 +31,45 @@ namespace Unipack.Views
             this.InitializeComponent();
         }
 
-        private void InitializeCategoryDetails(Category cat)
+        private async void InitializeCategoryDetails(Category cat)
         {
-            _categoryDVM = new CategoryDetailViewModel() {category = cat};
-            //TODO hier api call doen voor ophalen
+            _categoryDVM = new CategoryDetailViewModel() { category = cat };
             header.Text = _categoryDVM.category.Name;
+            var res = await _authenticationVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category/"+_categoryDVM.category.Id+"/items");
+            var stringRes = res.Content.ReadAsStringAsync().Result;
+            var items = JsonConvert.DeserializeObject<CategoryDto>(stringRes);
+
+            items.Items.ToList().ForEach(c => _categoryDVM.AddItem(new Item {AddedOn = c.AddedOn, ItemId = c.ItemId, Name = c.Name, Priority = (Priority) c.Priority}));
             ItemGrid.DataContext = _categoryDVM.items;
         }
 
-        private async void BtnAdd_Click(object sender, RoutedEventArgs e)
+        private async void BtnAddExisting_Click(object sender, RoutedEventArgs e)
         {
+            CategoryDetailAddExistingContentDiaglog addContentDialog = new CategoryDetailAddExistingContentDiaglog(_authenticationVM, _categoryDVM);
+
+            await addContentDialog.ShowAsync();
+            if (!addContentDialog.Success)
+                return;
+        }
+
+        private async void BtnAddNew_Click(object sender, RoutedEventArgs e)
+        {
+            CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_authenticationVM, _categoryDVM);
+
+            await addContentDialog.ShowAsync();
+            if (!addContentDialog.Success)
+                return;
         }
 
         public void ItemGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
         }
 
         private void ItemGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Category category = (Category)e.ClickedItem;
-            DetailParameters param = new DetailParameters(_authenticationVM, category);
+            Item item = (Item)e.ClickedItem;
 
-            page.Navigate(typeof(CategoryDetailPage), param);
+            page.Navigate(typeof(ItemPage), _authenticationVM);
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

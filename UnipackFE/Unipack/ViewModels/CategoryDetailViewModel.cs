@@ -9,7 +9,7 @@ using Unipack.Models;
 
 namespace Unipack.ViewModels
 {
-    class CategoryDetailViewModel
+    public class CategoryDetailViewModel
     {
         public ObservableCollection<Item> items { get; set; } = new ObservableCollection<Item>();
         public Category category { get; set; }
@@ -23,7 +23,6 @@ namespace Unipack.ViewModels
         public void DeleteItem(Item item)
         {
             items.Remove(item);
-            //TODO hier pai call doen voor categorie te verwijderen
         }
 
         public void Clear()

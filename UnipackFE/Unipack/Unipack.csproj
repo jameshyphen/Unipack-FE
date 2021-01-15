@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="DTOs\AuthenticationDto.cs" />
     <Compile Include="DTOs\CategoryDto.cs" />
+    <Compile Include="DTOs\ItemDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Enums\Priority.cs" />
     <Compile Include="MainPage.xaml.cs">
@@ -146,10 +147,16 @@
     <Compile Include="Views\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\CategoryAddContentDialog.xaml.cs">
+    <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml.cs">
+      <DependentUpon>CategoryDetailAddExistingContentDiaglog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddNewContentDialog.xaml.cs">
+      <DependentUpon>CategoryDetailAddNewContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Category\CategoryAddContentDialog.xaml.cs">
       <DependentUpon>CategoryAddContentDialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Dialogs\CategoryEditContentDialog.xaml.cs">
+    <Compile Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml.cs">
       <DependentUpon>CategoryEditContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
@@ -204,11 +211,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\CategoryAddContentDialog.xaml">
+    <Page Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Dialogs\CategoryEditContentDialog.xaml">
+    <Page Include="Views\Dialogs\CategoryDetail\CategoryDetailAddNewContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Category\CategoryAddContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
