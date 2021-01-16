@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unipack.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -15,12 +16,19 @@ using Windows.UI.Xaml.Navigation;
 
 // The Content Dialog item template is documented at https://go.microsoft.com/fwlink/?LinkId=234238
 
-namespace Unipack.Views.Dialogs
+namespace Unipack.Views.Dialogs.CategoryDetail
 {
-    public sealed partial class CategoryEditContentDialog : ContentDialog
+    public sealed partial class CategoryDetailAddNewContentDialog : ContentDialog
     {
-        public CategoryEditContentDialog()
+        public AuthenticationViewModel _authVM { get; set; }
+        public CategoryDetailViewModel _catDVM { get; set; }
+        public bool Success { get; set; }
+
+        public CategoryDetailAddNewContentDialog(AuthenticationViewModel authVM, CategoryDetailViewModel catDVM)
         {
+            _authVM = authVM;
+            _catDVM = catDVM;
+            Success = false;
             this.InitializeComponent();
         }
 

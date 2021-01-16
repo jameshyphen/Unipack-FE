@@ -8,7 +8,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:x1="using:Windows.UI.Xaml.Data"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-
+    <Frame Name="page">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.1*"/>
@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="0.75*"/>
             </Grid.ColumnDefinitions>
             <Button Grid.Column="0" Content="Add Category" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" HorizontalAlignment="Center" Text="Search. . ." FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            <TextBox Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
         </Grid>
         <GridView Grid.Row="2" x:Name="CategoryGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="CategoryGrid_ItemClick" SelectionChanged="CategoryGrid_SelectionChanged">
             <GridView.ItemTemplate>
@@ -34,8 +34,8 @@
                             <TextBlock FontSize="25" Text="{Binding NumberOfItems}" Margin="2"/>
                         </StackPanel>
                         <StackPanel Orientation="Horizontal">
-                            <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Name}" HorizontalAlignment="Center"/>
-                            <Button Content="Edit" HorizontalAlignment="Center"/>
+                                <Button Content="Delete" Name="Delete" Click="DeleteCategory" HorizontalAlignment="Center"/>
+                                <Button Content="Edit" Name="Edit"  Click="EditCategory" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </StackPanel>
                 </DataTemplate>
@@ -43,5 +43,5 @@
         </GridView>
 
     </Grid>
-
+    </Frame>
 </Page>

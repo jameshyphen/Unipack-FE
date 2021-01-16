@@ -16,11 +16,13 @@ namespace Unipack.ViewModels
     {
         public string Token { get; set; }
         public User User { get; set; }
+        public HttpClient Client { get; set; }
 
         public void LogOut()
         {
             this.User = null;
             this.Token = null;
+            this.Client = null;
         }
     }
 }
