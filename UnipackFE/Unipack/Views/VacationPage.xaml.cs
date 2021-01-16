@@ -34,6 +34,9 @@ namespace Unipack.Views
         public VacationPage(AuthenticationViewModel authvm) : this()
         {
             authVM = authvm;
+            Success = false;
+        }
+        public VacationPage(AuthenticationViewModel authvm) : this()
         {
             authVM = authvm;
         }

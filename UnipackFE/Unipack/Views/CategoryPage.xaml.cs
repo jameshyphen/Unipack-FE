@@ -39,6 +39,7 @@ namespace Unipack.Views
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
         }
+        public CategoryPage(AuthenticationViewModel auth) : this()
         {
             _authenticationVM = auth;
         }
