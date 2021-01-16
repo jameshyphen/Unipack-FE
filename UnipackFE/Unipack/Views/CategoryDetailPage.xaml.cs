@@ -52,6 +52,16 @@ namespace Unipack.Views
                 return;
         }
 
+        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (Item)button.DataContext;
+
+            _categoryDVM.DeleteItem(item);
+            await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/item/" + item.ItemId);
+
+        }
+
         public void ItemGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
         }
@@ -66,7 +76,7 @@ namespace Unipack.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            DetailParameters param = (DetailParameters)e.Parameter;
+            CategoryDetailParameters param = (CategoryDetailParameters)e.Parameter;
             _authenticationVM = param._authenticationVM;
             InitializeCategoryDetails(param._category);
         }

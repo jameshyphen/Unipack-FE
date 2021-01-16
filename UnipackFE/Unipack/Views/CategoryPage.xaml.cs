@@ -108,7 +108,7 @@ namespace Unipack.Views
         private void CategoryGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             Category category = (Category) e.ClickedItem;
-            DetailParameters param = new DetailParameters(_authenticationVM, category);
+            CategoryDetailParameters param = new CategoryDetailParameters(_authenticationVM, category);
 
             page.Navigate(typeof(CategoryDetailPage), param);
         }
@@ -121,13 +121,13 @@ namespace Unipack.Views
     }
 }
 
-public class DetailParameters
+public class CategoryDetailParameters
 {
 
     public AuthenticationViewModel _authenticationVM { get; set; }
     public Category _category { get; set; }
 
-    public DetailParameters(AuthenticationViewModel AVM, Category cat)
+    public CategoryDetailParameters(AuthenticationViewModel AVM, Category cat)
     {
         _authenticationVM = AVM;
         _category = cat;
