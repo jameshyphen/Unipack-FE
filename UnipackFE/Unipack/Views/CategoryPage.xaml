@@ -25,10 +25,6 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock FontSize="25" Text="{Binding Name}" Margin="2"/>
                             <StackPanel Orientation="Horizontal">
-                                <TextBlock FontSize="25" Text="Number of items: "/>
-                                <TextBlock FontSize="25" Text="{Binding NumberOfItems}" Margin="2"/>
-                            </StackPanel>
-                            <StackPanel Orientation="Horizontal">
                                 <Button Margin="5" Content="Delete" Name="Delete" Click="DeleteCategory" HorizontalAlignment="Center"/>
                                 <Button Margin="5" Content="Edit" Name="Edit"  Click="EditCategory" HorizontalAlignment="Center"/>
                             </StackPanel>
