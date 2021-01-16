@@ -36,16 +36,12 @@ namespace Unipack.Views
             authVM = authvm;
             Success = false;
         }
-        public VacationPage(AuthenticationViewModel authvm) : this()
-        {
-            authVM = authvm;
-        }
 
-        public async void getData()
+        public async void GetData()
         {
 
             HttpClient client = new HttpClient();
-            var json = await client.GetStringAsync(new Uri("http://195.201.101.209/unipack/api/vacation"));
+            var json = await client.GetStringAsync(new Uri("http://hyphen-solutions.be/unipack/api/vacation"));
             var vacationList = JsonConvert.DeserializeObject<ICollection<Vacation>>(json);
             vacationsListView.ItemsSource = vacationList;
 
