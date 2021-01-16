@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -26,6 +27,7 @@ namespace Unipack.Views
     {
         private AuthenticationViewModel _authenticationVM;
         private CategoryDetailViewModel _categoryDVM;
+        public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
         public CategoryDetailPage()
         {
             this.InitializeComponent();
@@ -40,7 +42,7 @@ namespace Unipack.Views
             var items = JsonConvert.DeserializeObject<CategoryDto>(stringRes);
 
             items.Items.ToList().ForEach(c => _categoryDVM.AddItem(new Item {AddedOn = c.AddedOn, ItemId = c.ItemId, Name = c.Name, Priority = (Priority) c.Priority}));
-            ItemGrid.DataContext = _categoryDVM.items;
+            ItemGrid.DataContext = _categoryDVM.Items;
         }
 
         private async void BtnAddNew_Click(object sender, RoutedEventArgs e)
@@ -71,6 +73,12 @@ namespace Unipack.Views
             Item item = (Item)e.ClickedItem;
 
             page.Navigate(typeof(ItemPage), _authenticationVM);
+        }
+
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            Items = _categoryDVM.Items;
+            ItemGrid.DataContext = new ObservableCollection<Item>(Items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)

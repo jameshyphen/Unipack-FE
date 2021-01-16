@@ -63,11 +63,11 @@ namespace Unipack.Views.Dialogs.CategoryDetail
                 if (!Validate())
                     return;
                 HttpClient client = new HttpClient();
-                var item = new ItemDto { AddedOn = DateTime.Now, Name = GetItemName(), Priority = (int) GetPriority() };
+                var item = new ItemCategoryDto { AddedOn = DateTime.Now, Name = GetItemName(), Priority = (int) GetPriority(), CategoryId = _catDVM.category.Id, CategoryName = _catDVM.category.Name };
                 var itemJson = JsonConvert.SerializeObject(item);
                 await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/item",
                     new StringContent(itemJson, System.Text.Encoding.UTF8, "application/json"));
-                _catDVM.AddItem(new Item {});
+                _catDVM.AddItem(new Item {Category = _catDVM.category, Name = item.Name, AddedOn = item.AddedOn, Priority = GetPriority()});
                 Success = true;
                 Hide();
             }

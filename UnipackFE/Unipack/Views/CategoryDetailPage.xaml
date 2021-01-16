@@ -17,7 +17,7 @@
             <TextBlock Name="header" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" FontSize="48"/>
             <StackPanel Orientation="Vertical" Grid.Row="1">
                 <Button Margin="5" Content="Add new item" FontSize="25" Click="BtnAddNew_Click" HorizontalAlignment="Center"/>
-                <TextBox Margin="5" HorizontalAlignment="Center" Text="Search. . ." FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+                <TextBox Margin="5" Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </StackPanel>
             <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="ItemGrid_ItemClick" SelectionChanged="ItemGrid_SelectionChanged">
                 <GridView.ItemTemplate>
