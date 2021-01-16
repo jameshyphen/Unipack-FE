@@ -43,15 +43,6 @@ namespace Unipack.Views
             ItemGrid.DataContext = _categoryDVM.items;
         }
 
-        private async void BtnAddExisting_Click(object sender, RoutedEventArgs e)
-        {
-            CategoryDetailAddExistingContentDiaglog addContentDialog = new CategoryDetailAddExistingContentDiaglog(_authenticationVM, _categoryDVM);
-
-            await addContentDialog.ShowAsync();
-            if (!addContentDialog.Success)
-                return;
-        }
-
         private async void BtnAddNew_Click(object sender, RoutedEventArgs e)
         {
             CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_authenticationVM, _categoryDVM);
