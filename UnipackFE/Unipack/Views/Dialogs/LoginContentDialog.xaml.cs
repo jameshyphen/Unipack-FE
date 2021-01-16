@@ -71,6 +71,8 @@ namespace Unipack.Views.Dialogs
                         Email = auth.UserDto.Email,
                         LastName = auth.UserDto.LastName
                     };
+                    authVM.Client = new HttpClient();
+                    authVM.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.Token);
                 }
                 else
                 {
