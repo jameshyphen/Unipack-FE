@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="DTOs\AuthenticationDto.cs" />
     <Compile Include="DTOs\CategoryDto.cs" />
+    <Compile Include="DTOs\ItemCategoryDto.cs" />
     <Compile Include="DTOs\ItemDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="Enums\Priority.cs" />
