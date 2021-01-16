@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -122,7 +122,11 @@
     <Compile Include="DTOs\AuthenticationDto.cs" />
     <Compile Include="DTOs\CategoryDto.cs" />
     <Compile Include="DTOs\ItemDto.cs" />
+    <Compile Include="DTOs\TaskDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
+    <Compile Include="DTOs\VacationDto.cs" />
+    <Compile Include="DTOs\PackListDto.cs" />
+    <Compile Include="DTOs\VacationLocationDto.cs" />
     <Compile Include="Enums\Priority.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -133,15 +137,15 @@
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vacation.cs" />
-    <Compile Include="Models\VacationList.cs" />
+    <Compile Include="Models\PackList.cs" />
     <Compile Include="Models\VacationListItem.cs" />
     <Compile Include="Models\VacationLocation.cs" />
     <Compile Include="Models\VacationTask.cs" />
-    <Compile Include="Enums\Priority.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\CategoryDetailViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\VacationViewModel.cs" />
     <Compile Include="Views\CategoryDetailPage.xaml.cs">
       <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
     </Compile>
@@ -162,6 +166,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
       <DependentUpon>RegisterContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Vacation\VacationAddContentDialog.xaml.cs">
+      <DependentUpon>VacationAddContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ItemPage.xaml.cs">
       <DependentUpon>ItemPage.xaml</DependentUpon>
@@ -231,6 +238,10 @@
     <Page Include="Views\Dialogs\RegisterContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\Vacation\VacationAddContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ItemPage.xaml">
       <SubType>Designer</SubType>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Unipack.Models
 {
-    public class VacationList
+    public class PackList
     {
         public int VacationListId { get; set; }
         public string Name { get; set; }

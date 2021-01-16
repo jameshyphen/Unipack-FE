@@ -6,8 +6,10 @@ using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using Unipack.DTOs;
 using Unipack.Models;
 using Unipack.ViewModels;
+using Unipack.Views.Dialogs.Vacation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -28,36 +30,30 @@ namespace Unipack.Views
    
     public sealed partial class VacationPage : Page
     {
-        
-        public AuthenticationViewModel authVM { get; set; }
+
+        private AuthenticationViewModel _authVM;
+        private VacationViewModel _vacationVM;
         ObservableCollection<Vacation> Vacations = new ObservableCollection<Vacation>(); //move this to viewModel later
 
         public VacationPage()
         {
             this.InitializeComponent();
+            _vacationVM = new VacationViewModel();
             getData();
         }
 
 
-        public void getData()
+        public async void getData()
         {
 
-            //HttpClient client = new HttpClient();
-            //var json = await client.GetStringAsync(new Uri("http://195.201.101.209/unipack/api/vacation"));
-            //var vacationList = JsonConvert.DeserializeObject<ICollection<Vacation>>(json);
-            //vacationsGridView.ItemsSource = vacationList;
+            var json = await _authVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/vacation");
+            var stringRes = json.Content.ReadAsStringAsync().Result;
+            var vacationList = JsonConvert.DeserializeObject<List<VacationDto>>(stringRes);
 
-            //TestData
-            VacationList l1 = new VacationList() { };
-            VacationList l2 = new VacationList() { };
-
-            Vacation v1 = new Vacation() { AddedOn = DateTime.Now, Name = "London", DateDeparture = DateTime.Today, DateReturn = DateTime.Now.AddDays(5), VacationLists = new Collection<VacationList>() { l1 } };
-            Vacation v2 = new Vacation() { AddedOn = DateTime.Now, Name = "Berlin", DateDeparture = DateTime.Now.AddDays(3), DateReturn = DateTime.Now.AddDays(15), VacationLists = new Collection<VacationList>() { l1,l2 } };
-            Vacation v3 = new Vacation() { AddedOn = DateTime.Now, Name = "Budapest", DateDeparture = DateTime.Now.AddDays(6), DateReturn = DateTime.Now.AddDays(30),VacationLists = new Collection<VacationList>() { l1 } };
-
-            Vacations.Add(v1);
-            Vacations.Add(v2);
-            Vacations.Add(v3);
+            vacationList.ForEach(v => _vacationVM.AddVacation(new Vacation { VacationId = v.VacationId , AddedOn = v.AddedOn, Name = v.Name, DateDeparture = v.DateDeparture, 
+                                                                            DateReturn = v.DateReturn, Locations = (ICollection<VacationLocation>)v.Locations, 
+                                                                            PackLists = (ICollection<PackList>)v.PackLists }));
+            vacationsGridView.DataContext = _vacationVM.vacations;
 
 
         }
@@ -70,12 +66,16 @@ namespace Unipack.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            authVM = (AuthenticationViewModel)e.Parameter;
+            _authVM = (AuthenticationViewModel)e.Parameter;
         }
 
-        private void AddButton_Click(object sender, RoutedEventArgs e)
+        private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
-
+            VacationAddContentDialog addContentDialog = new VacationAddContentDialog(_authVM, _vacationVM);
+            await addContentDialog.ShowAsync();
+            if (!addContentDialog.Success)
+                return;
+            Vacations = _vacationVM.vacations;
         }
 
     }

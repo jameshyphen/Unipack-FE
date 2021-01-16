@@ -118,7 +118,7 @@ namespace Unipack
             WelcomeDropDown.DataContext = WelcomeString;
             this.BtnCategories.Visibility = Visibility.Collapsed;
             this.BtnItems.Visibility = Visibility.Collapsed;
-            this.BtnVacations.Visibility = Visibility.Visible;
+            this.BtnVacations.Visibility = Visibility.Collapsed;
             this.ImageGallery.Visibility = Visibility.Visible;
             MainFrame.Visibility = Visibility.Collapsed;
         }
