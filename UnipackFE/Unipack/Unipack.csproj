@@ -120,18 +120,44 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="DTOs\AuthenticationDto.cs" />
+    <Compile Include="DTOs\CategoryDto.cs" />
+    <Compile Include="DTOs\ItemDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
+    <Compile Include="Enums\Priority.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Login.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Vacation.cs" />
+    <Compile Include="Models\VacationList.cs" />
+    <Compile Include="Models\VacationListItem.cs" />
+    <Compile Include="Models\VacationLocation.cs" />
+    <Compile Include="Models\VacationTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\CategoryDetailViewModel.cs" />
+    <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="Views\CategoryDetailPage.xaml.cs">
+      <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml.cs">
+      <DependentUpon>CategoryDetailAddExistingContentDiaglog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddNewContentDialog.xaml.cs">
+      <DependentUpon>CategoryDetailAddNewContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Category\CategoryAddContentDialog.xaml.cs">
+      <DependentUpon>CategoryAddContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml.cs">
+      <DependentUpon>CategoryEditContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
       <DependentUpon>RegisterContentDialog.xaml</DependentUpon>
@@ -177,7 +203,27 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\CategoryDetailPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\CategoryPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\CategoryDetail\CategoryDetailAddNewContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Category\CategoryAddContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -215,7 +261,9 @@
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Models\Commands\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
