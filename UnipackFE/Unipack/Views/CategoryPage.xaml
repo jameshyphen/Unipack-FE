@@ -1,5 +1,4 @@
 ﻿<Page
-    
     x:Class="Unipack.Views.CategoryPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -9,39 +8,34 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
     <Frame Name="page">
-    <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.1*"/>
-            <RowDefinition Height="0.8*"/>
-        </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Name="test" Text="Categories" TextWrapping="Wrap" FontSize="48"/>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.25*"/>
-                <ColumnDefinition Width="0.75*"/>
-            </Grid.ColumnDefinitions>
-            <Button Grid.Column="0" Content="Add Category" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
-            <TextBox Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+            <TextBlock HorizontalAlignment="Center" Grid.Row="0" Name="LblTitle" Text="Categories" TextWrapping="Wrap" FontSize="48"/>
+            <StackPanel x:Name="stackPanel" Orientation="Vertical" Grid.Row="1">
+                <Button Margin="5" Grid.Column="0" Content="Add Category" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
+                <TextBox Margin="5" Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            </StackPanel>
+            <GridView Grid.Row="2" x:Name="CategoryGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="CategoryGrid_ItemClick" SelectionChanged="CategoryGrid_SelectionChanged">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="25" Text="{Binding Name}" Margin="2"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="25" Text="Number of items: "/>
+                                <TextBlock FontSize="25" Text="{Binding NumberOfItems}" Margin="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Margin="5" Content="Delete" Name="Delete" Click="DeleteCategory" HorizontalAlignment="Center"/>
+                                <Button Margin="5" Content="Edit" Name="Edit"  Click="EditCategory" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
         </Grid>
-        <GridView Grid.Row="2" x:Name="CategoryGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="CategoryGrid_ItemClick" SelectionChanged="CategoryGrid_SelectionChanged">
-            <GridView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel Orientation="Vertical">
-                        <TextBlock FontSize="25" Text="{Binding Name}" Margin="2"/>
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock FontSize="25" Text="Number of items: "/>
-                            <TextBlock FontSize="25" Text="{Binding NumberOfItems}" Margin="2"/>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal">
-                                <Button Content="Delete" Name="Delete" Click="DeleteCategory" HorizontalAlignment="Center"/>
-                                <Button Content="Edit" Name="Edit"  Click="EditCategory" HorizontalAlignment="Center"/>
-                        </StackPanel>
-                    </StackPanel>
-                </DataTemplate>
-            </GridView.ItemTemplate>
-        </GridView>
-
-    </Grid>
     </Frame>
 </Page>
