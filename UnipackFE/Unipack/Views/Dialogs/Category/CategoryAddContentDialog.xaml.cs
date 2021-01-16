@@ -51,12 +51,15 @@ namespace Unipack.Views.Dialogs
                 HttpClient client = new HttpClient();
                 var category = new CategoryDto { Name = GetCategoryName(), AddedOn = DateTime.Now };
                 var categoryJson = JsonConvert.SerializeObject(category);
-                await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/category",
+                var res = await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/category",
                     new StringContent(categoryJson, System.Text.Encoding.UTF8, "application/json"));
-                _catVM.AddCategory(new Category {AddedOn = category.AddedOn,Name = category.Name, NumberOfItems = 0});
+                var stringRes = res.Content.ReadAsStringAsync().Result;
+                var cat = JsonConvert.DeserializeObject<CategoryDto>(stringRes);
+                _catVM.AddCategory(new Category() {AddedOn = cat.AddedOn, Id = cat.CategoryId, Name = cat.Name});
                 Success = true;
                 Hide();
             }
+
             catch (Exception e)
             {
                 Console.WriteLine($"Something went wrong: {e}");
