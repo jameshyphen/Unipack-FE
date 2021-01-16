@@ -50,7 +50,7 @@ namespace Unipack.Views.Dialogs
                     LastName = TxtLastName.Text, Password = PsbPassword.Password
                 };
                 var registerJson = JsonConvert.SerializeObject(register);
-                var res = await client.PostAsync("https://localhost:44349/unipack/api/account/register",
+                var res = await client.PostAsync("http://hyphen-solutions.be/unipack/api/account/register",
                     new StringContent(registerJson, System.Text.Encoding.UTF8, "application/json"));
                 var result = res.Content.ReadAsStringAsync().Result;
                 var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
@@ -66,6 +66,8 @@ namespace Unipack.Views.Dialogs
                         Email = auth.UserDto.Email,
                         LastName = auth.UserDto.LastName
                     };
+                    authVM.Client = new HttpClient();
+                    authVM.Client.DefaultRequestHeaders.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("Bearer", auth.Token);
                 }
                 else
                 {

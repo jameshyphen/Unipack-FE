@@ -4,13 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Unipack.Models
+namespace Unipack.DTOs
 {
-    public class Category
+    class CategoryDto
     {
-        public int Id { get; set; }
+        public int CategoryId { get; set; }
         public string Name { get; set; }
         public DateTime AddedOn { get; set; }
-        public int NumberOfItems { get; set; }
+        public List<ItemDto> Items { get; set; }
     }
 }
