@@ -27,12 +27,13 @@ namespace Unipack.Views
     public sealed partial class VacationPage : Page
     {
         public AuthenticationViewModel authVM { get; set; }
-
-        public VacationPage()
-        {
+        public bool Success { get; set; }
+        public VacationPage() {
             this.InitializeComponent();
         }
         public VacationPage(AuthenticationViewModel authvm) : this()
+        {
+            authVM = authvm;
         {
             authVM = authvm;
         }

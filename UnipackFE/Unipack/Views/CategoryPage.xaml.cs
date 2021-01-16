@@ -34,14 +34,13 @@ namespace Unipack.Views
         private CategoryViewModel _categoryVM;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
 
-        public CategoryPage(AuthenticationViewModel vm) : this()
-        {
-            _authenticationVM = vm;
-        }
         public CategoryPage()
         {
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
+        }
+        {
+            _authenticationVM = auth;
         }
 
         private async void InitializeCategories()
