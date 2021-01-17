@@ -57,7 +57,7 @@ namespace Unipack.Views.Dialogs
             LocationListView.DataContext = Locations;
 
             if (Locations.Count == 0)
-                BtnDeleteLoc.Visibility = Visibility.Collapsed;
+                BtnDeleteLocation.Visibility = Visibility.Collapsed;
         }
 
         private async void BtnAdd_OnClick(object sender, RoutedEventArgs e)
@@ -200,14 +200,14 @@ namespace Unipack.Views.Dialogs
             AddLocationForm.Visibility = Visibility.Collapsed;
         }
 
-        private void BtnDeleteLocation(object sender, RightTappedRoutedEventArgs e)
+        private void BtnDeleteLocation_Click(object sender, RoutedEventArgs e)
         {
             VacationLocation selectedVacation = (VacationLocation)LocationListView.SelectedItem;
             if (selectedVacation != null)
                 Locations.Remove(selectedVacation);
 
             if (Locations.Count == 0)
-                BtnDeleteLoc.Visibility = Visibility.Collapsed;
+                BtnDeleteLocation.Visibility = Visibility.Collapsed;
         }
     }
 }
