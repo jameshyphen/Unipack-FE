@@ -53,7 +53,7 @@ namespace Unipack.Views.Dialogs
                 var res = await client.PostAsync("http://hyphen-solutions.be/unipack/api/account/register",
                     new StringContent(registerJson, System.Text.Encoding.UTF8, "application/json"));
                 var result = res.Content.ReadAsStringAsync().Result;
-                var auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
+                AuthenticationDto auth = JsonConvert.DeserializeObject<AuthenticationDto>(result);
 
                 if (res.IsSuccessStatusCode)
                 {

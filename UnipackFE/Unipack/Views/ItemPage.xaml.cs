@@ -50,7 +50,7 @@ namespace Unipack.Views
             var stringRes = res.Content.ReadAsStringAsync().Result;
             var items = JsonConvert.DeserializeObject<List<ItemDto>>(stringRes);
 
-            items.ForEach(c => _ItemVM.AddItem(new Item { ItemId = c.ItemId, AddedOn = c.AddedOn, Name = c.Name, Category = c.Category}));
+            items.ForEach(c => _ItemVM.AddItem(new Item { ItemId = c.ItemId, AddedOn = c.AddedOn, Name = c.Name, Category = new Category { AddedOn = c.AddedOn, Id = c.CategoryId, Name = c.Name } }));
             ItemGrid.DataContext = _ItemVM.items;
         }
 
