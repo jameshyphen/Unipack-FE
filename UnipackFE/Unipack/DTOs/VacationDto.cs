@@ -4,16 +4,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Unipack.Models
+namespace Unipack.DTOs
 {
-    public class Vacation
+    public class VacationDto
     {
         public int VacationId { get; set; }
         public string Name { get; set; }
-        public ICollection<VacationLocation> Locations { get; set; }
-        public ICollection<PackList> PackLists { get; set; }
+        public ICollection<VacationLocationDto>  Locations { get; set; }
+        public ICollection<PackListDto> PackLists { get; set; }
+        public DateTime AddedOn { get; set; }
         public DateTime DateDeparture { get; set; }
         public DateTime DateReturn { get; set; }
-        public DateTime AddedOn { get; set; }
     }
 }

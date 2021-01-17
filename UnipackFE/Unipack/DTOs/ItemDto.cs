@@ -14,5 +14,6 @@ namespace Unipack.DTOs
         public int CategoryId { get; set; }
         public string CategoryName { get; set; }
         public int Priority { get; set; }
+        public Boolean IsCompleted { get; set; }
     }
 }

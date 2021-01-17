@@ -5,41 +5,61 @@
     xmlns:local="using:Unipack.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <StackPanel Orientation="Vertical">
-        <TextBlock Text="vacations"/>
-        <Grid>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="auto"/>
-            </Grid.RowDefinitions>
-            <TextBlock Grid.Row="0" Grid.Column="0" Text="Name"/>
-            <TextBlock Grid.Row="0" Grid.Column="1" Text="Departure" />
-            <TextBlock Grid.Row="0" Grid.Column="2" Text="Return"/>
-            <TextBlock Grid.Row="0" Grid.Column="3" Text="Total Lists"/>
 
-            <StackPanel Grid.Row="1" Grid.ColumnSpan="4" Orientation="Vertical">
-                <ListView  x:Name="vacationsListView">
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="local:Vacation">
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{x:Bind Name}"/>
-                                <TextBlock  Text="{x:Bind DateDeparture.Date}" />
-                                <TextBlock  Text="{x:Bind DateReturn.Date}"/>
-                                <TextBlock  Text="{x:Bind VacationLists.Count}"/>
+
+
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="auto" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock Grid.Row="0" Grid.Column="0" Text="Vacations" TextWrapping="Wrap" FontSize="48" Margin="50,0,0,0"/>
+        <Button Grid.Row="0" Grid.Column="1" Content="Add Vacation" Margin="50,0,0,0" FontSize="20" Click="AddButton_Click" />
+        
+        <GridView Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" x:Name="vacationsGridView" ItemsSource="{x:Bind Vacations}" 
+                   FlowDirection="LeftToRight" SelectionMode="None" 
+                   IsItemClickEnabled="True" ItemClick="vacationsListView_ItemClick"
+                   >
+            <GridView.ItemTemplate>
+                    <DataTemplate x:DataType="local:Vacation">
+                    <StackPanel Orientation="Vertical" Margin="10,10,10,10">
+                        <StackPanel Orientation="Horizontal">
+                        <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE709;"/>
+                        <TextBlock Text="{x:Bind Name}" Margin="10,0,0,0"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="Departure " />
+                                <TextBlock  Text="{x:Bind DateDeparture.ToShortDateString()}" Margin="10,0,0,0" />
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock  Text="Return "/>
+                                <TextBlock  Text="{x:Bind DateReturn.ToShortDateString()}" Margin="10,0,0,0"/>
+                        </StackPanel>
+                        
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="To Do Lists: "/>
+                                <TextBlock  Text="{x:Bind PackLists.Count}" Margin="10,0,0,0"/>
+
                             </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Edit" Click="EditButton_Click"/>
+                            <Button Content="Delete" Click="DeleteButton_Click"/>
+                        </StackPanel>
+                    </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+                </GridView>
         </Grid>
 
-    </StackPanel>
 </Page>
