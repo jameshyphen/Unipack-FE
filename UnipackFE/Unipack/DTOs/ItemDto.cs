@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Unipack.DTOs
 {
-    class ItemDto
+    public class ItemDto
     {
         public int ItemId { get; set; }
         public string Name { get; set; }
