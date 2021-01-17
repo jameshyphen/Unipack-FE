@@ -74,9 +74,7 @@ namespace Unipack.Views
                     PackListId = pl.PackListId
                 }).ToList()
             }));
-            vacationsGridView.DataContext = _vacationVM.vacations.OrderBy(v => v.DateDeparture);
-
-
+            _vacationVM.vacations.ToList().ForEach(x => Vacations.Add(x));
         }
 
         private void vacationsListView_ItemClick(object sender, ItemClickEventArgs e)
