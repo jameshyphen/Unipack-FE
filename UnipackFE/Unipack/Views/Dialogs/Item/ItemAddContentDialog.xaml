@@ -6,9 +6,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="250" Width="500">
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Height="500" Width="500">
 
-    <Grid>
+    <Grid Height="400">
         <Grid.RowDefinitions>
             <RowDefinition Height="0.15*"/>
             <RowDefinition Height="0.30*"/>
@@ -52,5 +52,6 @@
                 </Button.KeyboardAccelerators>
             </Button>
         </StackPanel>
+        <ComboBox x:Name="CmbCategory" Margin="0,67,0,0" Grid.Row="1" Width="430" HorizontalAlignment="Center" Height="42" ItemsSource="{x:Bind Categories}" DisplayMemberPath="Name"/>
     </Grid>
 </ContentDialog>

@@ -50,7 +50,7 @@ namespace Unipack.Views
             var stringRes = res.Content.ReadAsStringAsync().Result;
             var items = JsonConvert.DeserializeObject<List<ItemDto>>(stringRes);
 
-            items.ForEach(c => _ItemVM.AddItem(new Item { ItemId = c.ItemId, AddedOn = c.AddedOn, Name = c.Name, Category = new Category { AddedOn = c.AddedOn, Id = c.CategoryId, Name = c.Name } }));
+            items.ForEach(c => _ItemVM.AddItem(new Item { ItemId = c.ItemId, AddedOn = c.AddedOn, Name = c.Name, Category = new Category { Id = c.CategoryId, Name = c.CategoryName }}));
             ItemGrid.DataContext = _ItemVM.items;
         }
 
@@ -105,18 +105,10 @@ namespace Unipack.Views
 
         }
 
-        private void ItemGrid_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            Item Item = (Item)e.ClickedItem;
-            ItemDetailParameters param = new ItemDetailParameters(_authenticationVM, Item);
-
-            page.Navigate(typeof(ItemDetailPage), param);
-        }
-
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
             items = _ItemVM.items;
-            ItemGrid.DataContext = new ObservableCollection<Item>(items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
+            ItemGrid.DataContext = new ObservableCollection<Item>(items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower()) || c.Category.Name.ToLower().Contains(SearchBar.Text.ToLower())));
         }
     }
 }

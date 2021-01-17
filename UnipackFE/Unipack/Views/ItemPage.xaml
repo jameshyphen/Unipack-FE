@@ -23,14 +23,14 @@
                 <Button Grid.Column="0" Content="Add Item" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
                 <TextBox Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
             </Grid>
-            <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="ItemGrid_ItemClick" SelectionChanged="ItemGrid_SelectionChanged">
+            <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" SelectionChanged="ItemGrid_SelectionChanged">
                 <GridView.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Orientation="Vertical">
                             <TextBlock FontSize="20" Text="{Binding Name}" Margin="2"/>
                             <StackPanel Orientation="Horizontal">
                                 <TextBlock FontSize="15" Text="Category: "/>
-                                <TextBlock FontSize="12" Text="{Binding Category}" Margin="2"/>
+                                <TextBlock FontSize="12" Text="{Binding Category.Name}" Margin="2"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
                                 <Button Content="Delete" Name="Delete" Click="DeleteItem" HorizontalAlignment="Center"/>

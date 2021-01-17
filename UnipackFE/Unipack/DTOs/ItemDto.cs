@@ -11,8 +11,8 @@ namespace Unipack.DTOs
         public int ItemId { get; set; }
         public string Name { get; set; }
         public DateTime AddedOn { get; set; }
-        public CategoryDto Category { get; set; }
         public int CategoryId { get; set; }
+        public string CategoryName { get; set; }
         public int Priority { get; set; }
     }
 }
