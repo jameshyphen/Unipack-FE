@@ -8,7 +8,7 @@ namespace Unipack.Models
 {
     public class PackItem
     {
-        public int PackItem { get; set; }
+        public int PackItemId { get; set; }
         public int ItemId { get; set; }
     }
 }

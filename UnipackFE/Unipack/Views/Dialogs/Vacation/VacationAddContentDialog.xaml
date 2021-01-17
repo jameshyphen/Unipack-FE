@@ -75,7 +75,7 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-            <Button Grid.Row="6" Content="Delete Location" Click="BtnDeleteLocation" x:Name="BtnDeleteLoc"/>
+            <Button x:Name="BtnDeleteLocation" Grid.Row="6" Content="Delete Location" Click="BtnDeleteLocation_Click"/>
             <TextBlock Grid.Row="7" x:Name="TxtBottomError" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
 
 

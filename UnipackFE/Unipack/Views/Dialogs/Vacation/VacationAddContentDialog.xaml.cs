@@ -39,7 +39,7 @@ namespace Unipack.Views.Dialogs
             Locations = new ObservableCollection<VacationLocation>();
             this.InitializeComponent();
             AddLocationForm.Visibility = Visibility.Collapsed;
-            BtnDeleteLoc.Visibility = Visibility.Collapsed;
+            BtnDeleteLocation.Visibility = Visibility.Collapsed;
 
         }
 
@@ -140,7 +140,6 @@ namespace Unipack.Views.Dialogs
             this.TxtVacationName.Foreground = new SolidColorBrush(Colors.Black);
 
             await Create();
-
         }
 
         private void ButtonAddLocation_Click(object sender, RoutedEventArgs e)
@@ -156,7 +155,7 @@ namespace Unipack.Views.Dialogs
             Locations.OrderBy(l => l.DateArrival);
             LocationListView.DataContext = Locations;
 
-            BtnDeleteLoc.Visibility = Visibility.Visible;
+            BtnDeleteLocation.Visibility = Visibility.Visible;
             ResetLocationForm();
         }
 
@@ -184,14 +183,14 @@ namespace Unipack.Views.Dialogs
             AddLocationForm.Visibility = Visibility.Collapsed;
         }
 
-        private void BtnDeleteLocation(object sender, RightTappedRoutedEventArgs e)
+        private void BtnDeleteLocation_Click(object sender, RoutedEventArgs e)
         {
             VacationLocation selectedVacation = (VacationLocation)LocationListView.SelectedItem;
             if (selectedVacation != null)
                 Locations.Remove(selectedVacation);
 
             if (Locations.Count == 0)
-                BtnDeleteLoc.Visibility = Visibility.Collapsed;
+                BtnDeleteLocation.Visibility = Visibility.Collapsed;
         }
     }
 }
