@@ -60,17 +60,22 @@ namespace Unipack.Views
                 DateReturn = v.DateReturn, Locations = v.Locations.Select(loc => new VacationLocation
                 {
                     AddedOn = loc.AddedOn, CityName = loc.CityName, CountryName = loc.CountryName, DateArrival = loc.DateArrival, DateDeparture = loc.DateDeparture, VacationLocationId = loc.VacationLocationId
-                }).ToList()//,
-                //PackLists = v.PackLists.Select(pl => new PackList
-                //{
-                //    AddedOn = pl.AddedOn,
-                //    Items = pl.Items.Select(i => new Item { ItemId = i.ItemId, Name = i.Name, AddedOn = i.AddedOn, Priority = (Priority)i.Priority, 
-                //    //Category = i.Category
-                //    }).ToList(),
-                //    Name = pl.Name,
-                //    Tasks = pl.Tasks.Select(t => new PackTask { AddedOn = t.AddedOn, Name = t.Name, Priority = (Priority)t.Priority, Deadline = t.DeadLine, PackTaskId = t.PackTaskId }).ToList(),
-                //    PackListId = pl.PackListId
-                //}).ToList()
+                }).ToList(),
+                PackLists = v.PackLists.Select(pl => new PackList
+                {
+                    AddedOn = pl.AddedOn,
+                    Items = pl.Items.Select(i => new Item
+                    {
+                        ItemId = i.ItemId,
+                        Name = i.Name,
+                        AddedOn = i.AddedOn,
+                        Priority = (Priority)i.Priority,
+                        //Category = i.Category
+                    }).ToList(),
+                    Name = pl.Name,
+                    Tasks = pl.Tasks.Select(t => new PackTask { AddedOn = t.AddedOn, Name = t.Name, Priority = (Priority)t.Priority, Deadline = t.DeadLine, PackTaskId = t.PackTaskId }).ToList(),
+                    PackListId = pl.PackListId
+                }).ToList()
             }));
             vacationsGridView.DataContext = _vacationVM.vacations.OrderBy(v => v.DateDeparture);
 
@@ -82,7 +87,7 @@ namespace Unipack.Views
             Vacation selectedVacation = (Vacation)e.ClickedItem;
             VacationDetailParameters param = new VacationDetailParameters(_authVM, selectedVacation);
 
-            Frame.Navigate(typeof(PackListPage), param);
+            Frame.Navigate(typeof(VacationDetailPage), param);
         }
 
         

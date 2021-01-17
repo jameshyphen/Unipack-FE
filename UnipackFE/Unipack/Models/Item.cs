@@ -11,5 +11,7 @@ namespace Unipack.Models
         public DateTime AddedOn { get; set; }
         public Priority Priority { get; set; }
         public Category Category { get; set; }
+        public Boolean IsCompleted { get; set; }
+
     }
 }

@@ -135,6 +135,7 @@
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\Login.cs" />
+    <Compile Include="Models\PackItem.cs" />
     <Compile Include="Models\Register.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Vacation.cs" />
@@ -145,6 +146,7 @@
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
     <Compile Include="ViewModels\CategoryDetailViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\VacationDetailViewModel.cs" />
     <Compile Include="ViewModels\VacationViewModel.cs" />
     <Compile Include="Views\CategoryDetailPage.xaml.cs">
       <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
@@ -175,6 +177,9 @@
     </Compile>
     <Compile Include="Views\Dialogs\LoginContentDialog.xaml.cs">
       <DependentUpon>LoginContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\VacationDetailPage.xaml.cs">
+      <DependentUpon>VacationDetailPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VacationPage.xaml.cs">
       <DependentUpon>VacationPage.xaml</DependentUpon>
@@ -248,6 +253,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\LoginContentDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\VacationDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -12,5 +12,6 @@ namespace Unipack.DTOs
         public string Name { get; set; }
         public DateTime AddedOn { get; set; }
         public int Priority { get; set; }
+        public Boolean IsCompleted { get; set; }
     }
 }

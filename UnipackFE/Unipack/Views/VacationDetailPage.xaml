@@ -1,0 +1,50 @@
+﻿<Page
+    x:Class="Unipack.Views.VacationDetailPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Unipack.Models"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock x:Name="Header" Text=""/>
+        <ListView x:Name="PackListView"
+              ItemsSource="{x:Bind PackLists}">
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="local:PackList">
+                    <StackPanel Orientation="Vertical">
+                        <StackPanel>
+                            <TextBlock Text="{x:Bind Name}"/>
+                        </StackPanel>
+                        <Button Content="Delete a To Do" Click="DeleteItemButton_Click" />
+                        <GridView x:Name="ItemGridView" ItemsSource="{x:Bind Items}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="local:Item">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Text="Tasks"/>
+                            <Button Content="Delete a Task" Click="DeleteTaskButton_Click" />
+
+                        </StackPanel>
+                        <GridView x:Name="TaskGridView" ItemsSource="{x:Bind Tasks}">
+                            <GridView.ItemTemplate>
+                                <DataTemplate x:DataType="local:Item">
+                                    <StackPanel Orientation="Horizontal">
+                                        <CheckBox Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridView.ItemTemplate>
+                        </GridView>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Page>
