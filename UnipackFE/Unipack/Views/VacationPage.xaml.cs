@@ -63,7 +63,6 @@ namespace Unipack.Views
                 }).ToList(),
                 PackLists = v.PackLists.Select(pl => new PackList
                 {
-                    //CHANGE TO PACKITEMS
                     AddedOn = pl.AddedOn,
                     PackItems = pl.Items.Select(i => new PackItem
                     {
