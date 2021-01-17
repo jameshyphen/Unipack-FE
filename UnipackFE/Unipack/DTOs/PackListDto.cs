@@ -7,7 +7,7 @@ namespace Unipack.DTOs
     {
         public int PackListId { get; set; }
         public string Name { get; set; }
-        public ICollection<ItemDto> Items { get; set; }
+        public ICollection<PackItemDto> Items { get; set; }
         public ICollection<PackTaskDto> Tasks { get; set; }
         public DateTime AddedOn { get; set; }
     }

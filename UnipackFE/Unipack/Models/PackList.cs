@@ -11,7 +11,7 @@ namespace Unipack.Models
         public int PackListId { get; set; }
         public string Name { get; set; }
         public User AuthorUser { get; set; }
-        public ICollection<Item> Items { get; set; }
+        public ICollection<PackItem> PackItems { get; set; }
         public ICollection<PackTask> Tasks { get; set; }
         public DateTime AddedOn { get; set; }
     }

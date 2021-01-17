@@ -92,7 +92,7 @@ namespace Unipack.Views.Dialogs
                                                                         AddedOn = pl.AddedOn,
                                                                         Name = pl.Name,
                                                                         PackListId = pl.PackListId,
-                                                                        Items = pl.Items.Select(i => new Item
+                                                                        PackItems = pl.Items.Select(i => new Item
                                                                         {
                                                                             Name = i.Name,
                                                                             AddedOn = i.AddedOn, //Category = i.CategoryId,

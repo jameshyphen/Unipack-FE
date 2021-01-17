@@ -63,14 +63,12 @@ namespace Unipack.Views
                 }).ToList(),
                 PackLists = v.PackLists.Select(pl => new PackList
                 {
+                    //CHANGE TO PACKITEMS
                     AddedOn = pl.AddedOn,
-                    Items = pl.Items.Select(i => new Item
+                    PackItems = pl.Items.Select(i => new PackItem
                     {
-                        ItemId = i.ItemId,
-                        Name = i.Name,
-                        AddedOn = i.AddedOn,
-                        Priority = (Priority)i.Priority,
-                        //Category = i.Category
+                        ItemId = i.ItemId,  PackedQuantity = i.Quantity
+
                     }).ToList(),
                     Name = pl.Name,
                     Tasks = pl.Tasks.Select(t => new PackTask { AddedOn = t.AddedOn, Name = t.Name, Priority = (Priority)t.Priority, Deadline = t.DeadLine, PackTaskId = t.PackTaskId }).ToList(),

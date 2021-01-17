@@ -68,21 +68,7 @@ namespace Unipack.Views.Dialogs
                                                                                             CountryName = loc.CountryName, DateArrival = loc.DateArrival, 
                                                                                             DateDeparture =loc.DateDeparture, 
                                                                                             VacationLocationId = loc.VacationLocationId }).ToList(),
-                                                            VacationId = vacation.VacationId, 
-                                                            PackLists = vacation.PackLists.Select(pl => 
-                                                                    new PackList
-                                                                    {
-                                                                        AddedOn = pl.AddedOn,
-                                                                        Name = pl.Name,
-                                                                        PackListId = pl.PackListId,
-                                                                        Items = pl.Items.Select(i => new Item
-                                                                        {
-                                                                            Name = i.Name,
-                                                                            AddedOn = i.AddedOn, //Category = i.CategoryId,
-                                                                            ItemId = i.ItemId,
-                                                                            Priority = (Priority)i.Priority
-                                                                        }).ToList()
-                                                                    }).ToList()
+                                                            VacationId = vacation.VacationId
                                                             });
                 
                 Success = true;
@@ -129,7 +115,15 @@ namespace Unipack.Views.Dialogs
             DateTime returnTime = dateReturn.Value.DateTime;
 
 
-            var newVac = new VacationDto() {AddedOn = DateTime.Now, Name = TxtVacationName.Text, Locations = (ICollection<VacationLocationDto>)Locations, 
+            var newVac = new VacationDto() {AddedOn = DateTime.Now, Name = TxtVacationName.Text, Locations = Locations.Select(loc => new VacationLocationDto
+                    {
+                        CityName = loc.CityName,
+                        DateDeparture = loc.DateDeparture,
+                        VacationLocationId = loc.VacationLocationId,
+                        AddedOn = loc.AddedOn,
+                        CountryName = loc.CountryName,
+                        DateArrival = loc.DateArrival,
+                    }).ToList(),
                                             DateDeparture = departureTime, DateReturn = returnTime  };
             return newVac;
         }

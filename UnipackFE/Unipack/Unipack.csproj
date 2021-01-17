@@ -123,6 +123,7 @@
     <Compile Include="DTOs\CategoryDto.cs" />
     <Compile Include="DTOs\ItemCategoryDto.cs" />
     <Compile Include="DTOs\ItemDto.cs" />
+    <Compile Include="DTOs\PackItemDto.cs" />
     <Compile Include="DTOs\PackTaskDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
     <Compile Include="DTOs\VacationDto.cs" />

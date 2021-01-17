@@ -23,12 +23,12 @@ namespace Unipack.ViewModels
         public void AddItemToPackList(PackList packList, Item item)
         {
             var list = PackLists.Where(p => p.PackListId == packList.PackListId).FirstOrDefault();
-            list.Items.Add(item);
+            list.PackItems.Add(item);
         }
         public void DeleteItem(PackList packList, Item item)
         {
             var list = PackLists.Where(p => p.PackListId == packList.PackListId).FirstOrDefault();
-            list.Items.Remove(item);
+            list.PackItems.Remove(item);
         }
 
         public void Clear()
