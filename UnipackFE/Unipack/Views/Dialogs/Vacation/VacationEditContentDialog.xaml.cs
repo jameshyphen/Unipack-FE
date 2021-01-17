@@ -25,22 +25,39 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Unipack.Views.Dialogs
 {
-    public sealed partial class VacationAddContentDialog : ContentDialog
+    public sealed partial class VacationEditContentDialog : ContentDialog
     {
         ObservableCollection<VacationLocation> Locations { get; set; }
         private AuthenticationViewModel _authVM;
         private VacationViewModel _vacVM;
         public bool Success { get; set; }
-        public VacationAddContentDialog(AuthenticationViewModel authVM, VacationViewModel vacVM)
+        public VacationEditContentDialog(AuthenticationViewModel authVM, VacationViewModel vacVM, Vacation vac)
         {
             _vacVM = vacVM;
             _authVM = authVM;
             Success = false;
             Locations = new ObservableCollection<VacationLocation>();
             this.InitializeComponent();
+            FillForm(vac);
             AddLocationForm.Visibility = Visibility.Collapsed;
-            BtnDeleteLoc.Visibility = Visibility.Collapsed;
+            
 
+        }
+
+        private void FillForm(Vacation vac)
+        {
+            TxtVacationName.Text = vac.Name;
+            DepartureDatePicker.Date = vac.DateDeparture;
+            ReturnDatePicker.Date = vac.DateReturn;
+            foreach (VacationLocation l in vac.Locations)
+            {
+                Locations.Add(l);
+
+            }
+            LocationListView.DataContext = Locations;
+
+            if (Locations.Count == 0)
+                BtnDeleteLoc.Visibility = Visibility.Collapsed;
         }
 
         private async void BtnAdd_OnClick(object sender, RoutedEventArgs e)
@@ -156,7 +173,6 @@ namespace Unipack.Views.Dialogs
             Locations.OrderBy(l => l.DateArrival);
             LocationListView.DataContext = Locations;
 
-            BtnDeleteLoc.Visibility = Visibility.Visible;
             ResetLocationForm();
         }
 

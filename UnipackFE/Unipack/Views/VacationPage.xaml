@@ -52,6 +52,10 @@
 
                             </StackPanel>
                         </StackPanel>
+                        <StackPanel Orientation="Horizontal">
+                            <Button Content="Edit" Click="EditButton_Click"/>
+                            <Button Content="Delete" Click="DeleteButton_Click"/>
+                        </StackPanel>
                     </StackPanel>
                     </DataTemplate>
                 </GridView.ItemTemplate>

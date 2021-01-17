@@ -164,6 +164,9 @@
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
       <DependentUpon>RegisterContentDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Dialogs\Vacation\VacationEditContentDialog.xaml.cs">
+      <DependentUpon>VacationEditContentDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Dialogs\Vacation\VacationAddContentDialog.xaml.cs">
       <DependentUpon>VacationAddContentDialog.xaml</DependentUpon>
     </Compile>
@@ -229,6 +232,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Dialogs\RegisterContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\Vacation\VacationEditContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

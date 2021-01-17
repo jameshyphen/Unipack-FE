@@ -34,7 +34,7 @@ namespace Unipack.Views
 
         private AuthenticationViewModel _authVM;
         private VacationViewModel _vacationVM;
-        ObservableCollection<Vacation> Vacations = new ObservableCollection<Vacation>(); //move this to viewModel later
+        ObservableCollection<Vacation> Vacations = new ObservableCollection<Vacation>(); 
 
         public VacationPage()
         {
@@ -42,8 +42,14 @@ namespace Unipack.Views
             _vacationVM = new VacationViewModel();
         }
 
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            _authVM = (AuthenticationViewModel)e.Parameter;
+            InitializeVacations();
+        }
 
-        public async void GetData()
+        public async void InitializeVacations()
         {
 
             var json = await _authVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/vacation");
@@ -66,22 +72,20 @@ namespace Unipack.Views
                 //    PackListId = pl.PackListId
                 //}).ToList()
             }));
-            vacationsGridView.DataContext = _vacationVM.vacations;
+            vacationsGridView.DataContext = _vacationVM.vacations.OrderBy(v => v.DateDeparture);
 
 
         }
 
         private void vacationsListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            Vacation selectedVacation = (Vacation)vacationsGridView.SelectedItem;
+            Vacation selectedVacation = (Vacation)e.ClickedItem;
+            VacationDetailParameters param = new VacationDetailParameters(_authVM, selectedVacation);
+
+            Frame.Navigate(typeof(PackListPage), param);
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            _authVM = (AuthenticationViewModel)e.Parameter;
-            GetData();
-        }
+        
 
         private async void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -92,5 +96,40 @@ namespace Unipack.Views
             Vacations = _vacationVM.vacations;
         }
 
+        private async void DeleteButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var vac = (Vacation)button.DataContext;
+
+            _vacationVM.DeleteVacation(vac.VacationId);
+            await _authVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/vacation/" + vac.VacationId);
+        }
+
+        private async void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var vac = (Vacation)button.DataContext;
+
+            VacationEditContentDialog editContentDialog = new VacationEditContentDialog(_authVM, _vacationVM, vac);
+
+            await editContentDialog.ShowAsync();
+            if (!editContentDialog.Success)
+                return;
+            Vacations = _vacationVM.vacations;
+        }
+    }
+}
+
+
+public class VacationDetailParameters
+{
+
+    public AuthenticationViewModel _authenticationVM { get; set; }
+    public Vacation _vacation { get; set; }
+
+    public VacationDetailParameters(AuthenticationViewModel AVM, Vacation vac)
+    {
+        _authenticationVM = AVM;
+        _vacation = vac;
     }
 }
