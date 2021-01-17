@@ -39,7 +39,7 @@ namespace Unipack.ViewModels
 
         internal void DeleteTask(PackTask task)
         {
-            var list = PackLists.Where(p => p.PackListId == packList.PackListId).FirstOrDefault();
+            var list = PackLists.Where(p => p.PackListId == p.PackListId).FirstOrDefault();
             list.Tasks.Remove(task);
         }
     }

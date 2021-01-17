@@ -19,7 +19,7 @@
                             <TextBlock Text="{x:Bind Name}"/>
                         </StackPanel>
                         <Button Content="Delete a To Do" Click="DeleteItemButton_Click" />
-                        <GridView x:Name="ItemGridView" ItemsSource="{x:Bind Items}">
+                        <GridView x:Name="ItemGridView" ItemsSource="{x:Bind PackItems}">
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Item">
                                     <StackPanel Orientation="Horizontal">
@@ -37,7 +37,7 @@
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Item">
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox " Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}" Click="TaskCheckBox_Click_1"/>
+                                        <CheckBox Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}" Click="TaskCheckBox_Click_1"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>

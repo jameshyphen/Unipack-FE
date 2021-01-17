@@ -13,5 +13,6 @@ namespace Unipack.DTOs
         public int ItemId { get; set; }
         public ItemDto Item { get; set; }
         public int Quantity { get; set; }
+        public int PackedQuantity { get; set; }
     }
 }
