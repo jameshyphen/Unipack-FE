@@ -16,8 +16,8 @@
             <RowDefinition Height="0.10*"/>
             <RowDefinition Height="0.25*"/>
         </Grid.RowDefinitions>
-        <TextBlock Grid.Row="0" Text="New Item" TextWrapping="Wrap" FontSize="20"/>
-        <TextBox Grid.Row="1" x:Name="TxtItemName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Item Name"/>
+        <TextBlock Grid.Row="0" Text="New item or task" TextWrapping="Wrap" FontSize="20"/>
+        <TextBox Grid.Row="1" x:Name="TxtItemName" VerticalContentAlignment="Center" HorizontalAlignment="Center" Text="&#xD;&#xA;" TextWrapping="Wrap" VerticalAlignment="Top" Height="42" Width="430" FontSize="20" PlaceholderText="Name"/>
         <TextBlock Grid.Row="2" x:Name="TxtBottomError" HorizontalAlignment="Left" Text="" TextWrapping="Wrap" VerticalAlignment="Top" Foreground="#FFCB0000"/>
         <StackPanel Grid.Row="3" Orientation="Horizontal">
             <RadioButton Name="rbMedium" Content="Medium"/>
