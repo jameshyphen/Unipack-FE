@@ -57,15 +57,15 @@ namespace Unipack.Views
 
         private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
         {
-            Item item = (Item)PackListView.SelectedItem;
+            PackItem item = (PackItem)PackListView.SelectedItem;
             
-            //_vacationDVM.DeleteItem(item);
+            _vacationDVM.DeleteItem(item);
         }
 
         private void DeleteTaskButton_Click(object sender, RoutedEventArgs e)
         {
             PackTask task = (PackTask)PackListView.SelectedItem;
-           // _vacationDVM.DeleteTask(task);
+            _vacationDVM.DeleteTask(task);
         }
     }
 }

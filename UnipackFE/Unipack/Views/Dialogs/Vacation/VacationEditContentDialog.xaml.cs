@@ -78,30 +78,24 @@ namespace Unipack.Views.Dialogs
                 var vacationJson = JsonConvert.SerializeObject(vacation);
                 await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/vacation",
                     new StringContent(vacationJson, System.Text.Encoding.UTF8, "application/json"));
-                _vacVM.AddVacation(new Models.Vacation { AddedOn = vacation.AddedOn, Name = vacation.Name, DateDeparture = vacation.DateDeparture, 
-                                                            DateReturn = vacation.DateReturn, 
-                                                            Locations = vacation.Locations.Select(loc => 
-                                                                    new VacationLocation {AddedOn = loc.AddedOn, CityName = loc.CityName, 
-                                                                                            CountryName = loc.CountryName, DateArrival = loc.DateArrival, 
-                                                                                            DateDeparture =loc.DateDeparture, 
-                                                                                            VacationLocationId = loc.VacationLocationId }).ToList(),
-                                                            VacationId = vacation.VacationId, 
-                                                            PackLists = vacation.PackLists.Select(pl => 
-                                                                    new PackList
-                                                                    {
-                                                                        AddedOn = pl.AddedOn,
-                                                                        Name = pl.Name,
-                                                                        PackListId = pl.PackListId,
-                                                                        PackItems = pl.Items.Select(i => new Item
-                                                                        {
-                                                                            Name = i.Name,
-                                                                            AddedOn = i.AddedOn, //Category = i.CategoryId,
-                                                                            ItemId = i.ItemId,
-                                                                            Priority = (Priority)i.Priority
-                                                                        }).ToList()
-                                                                    }).ToList()
-                                                            });
-                
+                _vacVM.AddVacation(new Models.Vacation
+                {
+                    AddedOn = vacation.AddedOn,
+                    Name = vacation.Name,
+                    DateDeparture = vacation.DateDeparture,
+                    DateReturn = vacation.DateReturn,
+                    Locations = vacation.Locations.Select(loc =>
+                            new VacationLocation
+                            {
+                                AddedOn = loc.AddedOn,
+                                CityName = loc.CityName,
+                                CountryName = loc.CountryName,
+                                DateArrival = loc.DateArrival,
+                                DateDeparture = loc.DateDeparture,
+                                VacationLocationId = loc.VacationLocationId
+                            }).ToList(),
+                    VacationId = vacation.VacationId
+                });
                 Success = true;
                 Hide();
             }
@@ -146,8 +140,22 @@ namespace Unipack.Views.Dialogs
             DateTime returnTime = dateReturn.Value.DateTime;
 
 
-            var newVac = new VacationDto() {AddedOn = DateTime.Now, Name = TxtVacationName.Text, Locations = (ICollection<VacationLocationDto>)Locations, 
-                                            DateDeparture = departureTime, DateReturn = returnTime  };
+            var newVac = new VacationDto()
+            {
+                AddedOn = DateTime.Now,
+                Name = TxtVacationName.Text,
+                Locations = Locations.Select(loc => new VacationLocationDto
+                {
+                    CityName = loc.CityName,
+                    DateDeparture = loc.DateDeparture,
+                    VacationLocationId = loc.VacationLocationId,
+                    AddedOn = loc.AddedOn,
+                    CountryName = loc.CountryName,
+                    DateArrival = loc.DateArrival,
+                }).ToList(),
+                DateDeparture = departureTime,
+                DateReturn = returnTime
+            };
             return newVac;
         }
 

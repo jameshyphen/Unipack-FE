@@ -124,7 +124,7 @@ namespace Unipack.Views.Dialogs
                         CountryName = loc.CountryName,
                         DateArrival = loc.DateArrival,
                     }).ToList(),
-                                            DateDeparture = departureTime, DateReturn = returnTime  };
+                     DateDeparture = departureTime, DateReturn = returnTime  };
             return newVac;
         }
 
