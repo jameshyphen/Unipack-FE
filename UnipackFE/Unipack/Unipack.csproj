@@ -140,8 +140,13 @@
     <Compile Include="Models\VacationTask.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AuthenticationViewModel.cs" />
+    <Compile Include="ViewModels\ItemDetailViewModel.cs" />
     <Compile Include="ViewModels\CategoryDetailViewModel.cs" />
     <Compile Include="ViewModels\CategoryViewModel.cs" />
+    <Compile Include="ViewModels\ItemViewModel.cs" />
+    <Compile Include="Views\ItemDetailPage.xaml.cs">
+      <DependentUpon>ItemDetailPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\CategoryDetailPage.xaml.cs">
       <DependentUpon>CategoryDetailPage.xaml</DependentUpon>
     </Compile>
@@ -156,6 +161,15 @@
     </Compile>
     <Compile Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml.cs">
       <DependentUpon>CategoryEditContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\ItemDetail\ItemDetailAddNewContentDialog.xaml.cs">
+      <DependentUpon>ItemDetailAddNewContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Item\ItemAddContentDialog.xaml.cs">
+      <DependentUpon>ItemAddContentDialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Dialogs\Item\ItemEditContentDialog.xaml.cs">
+      <DependentUpon>ItemEditContentDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\RegisterContentDialog.xaml.cs">
       <DependentUpon>RegisterContentDialog.xaml</DependentUpon>
@@ -204,6 +218,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Views\ItemDetailPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Views\CategoryDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -223,6 +241,18 @@
     <Page Include="Views\Dialogs\Category\CategoryEditContentDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Dialogs\ItemDetail\ItemDetailAddNewContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\Item\ItemAddContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Dialogs\Item\ItemEditContentDialog.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\Dialogs\RegisterContentDialog.xaml">
       <Generator>MSBuild:Compile</Generator>
