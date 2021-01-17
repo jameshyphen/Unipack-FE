@@ -26,13 +26,11 @@ namespace Unipack.Views.Dialogs
 {
     public sealed partial class CategoryEditContentDialog : ContentDialog
     {
-        public AuthenticationViewModel _authVM { get; set; }
         public CategoryViewModel _catVM { get; set; }
         public bool Success { get; set; }
         public Category Current { get; set; }
-        public CategoryEditContentDialog(AuthenticationViewModel authVM, CategoryViewModel catVM, Category cat)
+        public CategoryEditContentDialog(CategoryViewModel catVM, Category cat)
         {
-            _authVM = authVM;
             _catVM = catVM;
             Success = false;
             this.InitializeComponent();
@@ -52,12 +50,8 @@ namespace Unipack.Views.Dialogs
             {
                 if (!Validate())
                     return;
-                HttpClient client = new HttpClient();
                 var category = new CategoryDto { Name = GetCategoryName(), AddedOn = Current.AddedOn, CategoryId = Current.Id};
-                var categoryJson = JsonConvert.SerializeObject(category);
-                await _authVM.Client.PutAsync("http://hyphen-solutions.be/unipack/api/category/"+category.CategoryId,
-                    new StringContent(categoryJson, System.Text.Encoding.UTF8, "application/json"));
-                _catVM.EditCategory(Current);
+                _catVM.EditCategory(category, Current);
                 Success = true;
                 Hide();
             }

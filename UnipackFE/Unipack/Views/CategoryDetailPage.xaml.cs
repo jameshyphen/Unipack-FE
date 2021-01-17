@@ -27,41 +27,41 @@ namespace Unipack.Views
     {
         private AuthenticationViewModel _authenticationVM;
         private CategoryDetailViewModel _categoryDVM;
-        public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
         public CategoryDetailPage()
         {
             this.InitializeComponent();
         }
 
-        private async void InitializeCategoryDetails(Category cat)
+        private void InitializeCategoryDetails(Category cat)
         {
-            _categoryDVM = new CategoryDetailViewModel() { category = cat };
-            header.Text = _categoryDVM.category.Name;
-            var res = await _authenticationVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category/"+_categoryDVM.category.Id+"/items");
-            var stringRes = res.Content.ReadAsStringAsync().Result;
-            var items = JsonConvert.DeserializeObject<CategoryDto>(stringRes);
+            _categoryDVM = new CategoryDetailViewModel(cat, _authenticationVM);
+            header.Text = _categoryDVM.Category.Name;
+            Refresh();
+        }
 
-            items.Items.ToList().ForEach(c => _categoryDVM.AddItem(new Item {AddedOn = c.AddedOn, ItemId = c.ItemId, Name = c.Name, Priority = (Priority) c.Priority}));
+        private void Refresh()
+        {
             ItemGrid.DataContext = _categoryDVM.Items;
         }
 
         private async void BtnAddNew_Click(object sender, RoutedEventArgs e)
         {
-            CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_authenticationVM, _categoryDVM);
+            CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_categoryDVM);
 
             await addContentDialog.ShowAsync();
             if (!addContentDialog.Success)
                 return;
+            Refresh();
         }
 
-        private async void BtnDelete_Click(object sender, RoutedEventArgs e)
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
         {
             var button = (Button)sender;
             var item = (Item)button.DataContext;
 
             _categoryDVM.DeleteItem(item);
-            await _authenticationVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/item/" + item.ItemId);
 
+            Refresh();
         }
 
         public void ItemGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -77,8 +77,7 @@ namespace Unipack.Views
 
         private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
         {
-            Items = _categoryDVM.Items;
-            ItemGrid.DataContext = new ObservableCollection<Item>(Items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
+            ItemGrid.DataContext = new ObservableCollection<Item>(_categoryDVM.Items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
