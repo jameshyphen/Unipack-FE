@@ -121,6 +121,7 @@
     </Compile>
     <Compile Include="DTOs\AuthenticationDto.cs" />
     <Compile Include="DTOs\CategoryDto.cs" />
+    <Compile Include="DTOs\ItemCategoryDto.cs" />
     <Compile Include="DTOs\ItemDto.cs" />
     <Compile Include="DTOs\PackTaskDto.cs" />
     <Compile Include="DTOs\UserDto.cs" />
@@ -150,9 +151,6 @@
     </Compile>
     <Compile Include="Views\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml.cs">
-      <DependentUpon>CategoryDetailAddExistingContentDiaglog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Dialogs\CategoryDetail\CategoryDetailAddNewContentDialog.xaml.cs">
       <DependentUpon>CategoryDetailAddNewContentDialog.xaml</DependentUpon>
@@ -215,10 +213,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\CategoryPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Dialogs\CategoryDetail\CategoryDetailAddExistingContentDiaglog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

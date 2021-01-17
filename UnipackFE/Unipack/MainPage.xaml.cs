@@ -65,6 +65,7 @@ namespace Unipack
                 this.BtnItems.Visibility = Visibility.Visible;
                 this.BtnVacations.Visibility = Visibility.Visible;
                 this.ImageGallery.Visibility = Visibility.Collapsed;
+                this.BtnLogOut.Visibility = Visibility.Visible;
                 MainFrame.Navigate(typeof(VacationPage), _authenticationVM);
                 MainFrame.Visibility = Visibility.Visible;
             }
@@ -120,6 +121,7 @@ namespace Unipack
             this.BtnItems.Visibility = Visibility.Collapsed;
             this.BtnVacations.Visibility = Visibility.Collapsed;
             this.ImageGallery.Visibility = Visibility.Visible;
+            this.BtnLogOut.Visibility = Visibility.Collapsed;
             MainFrame.Visibility = Visibility.Collapsed;
         }
 

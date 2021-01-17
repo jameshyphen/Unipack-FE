@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
+using System.Threading.Tasks;
+using Unipack.DTOs;
+using Unipack.Enums;
+using Unipack.Models;
 using Unipack.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -32,12 +39,77 @@ namespace Unipack.Views.Dialogs.CategoryDetail
             this.InitializeComponent();
         }
 
-        private void ContentDialog_PrimaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        public string GetItemName()
         {
+            return TxtItemName.Text;
         }
 
-        private void ContentDialog_SecondaryButtonClick(ContentDialog sender, ContentDialogButtonClickEventArgs args)
+        public Priority GetPriority()
         {
+            if ((bool)rbMedium.IsChecked)
+                return Priority.Medium;
+            if ((bool)rbHigh.IsChecked)
+                return Priority.High;
+            if ((bool)rbUrgent.IsChecked)
+                return Priority.Urgent;
+            return Priority.Low;
+
+        }
+
+        public async Task Create()
+        {
+            try
+            {
+                if (!Validate())
+                    return;
+                HttpClient client = new HttpClient();
+                var item = new ItemCategoryDto { AddedOn = DateTime.Now, Name = GetItemName(), Priority = (int) GetPriority(), CategoryId = _catDVM.category.Id, CategoryName = _catDVM.category.Name };
+                var itemJson = JsonConvert.SerializeObject(item);
+                var res = await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/item",
+                    new StringContent(itemJson, System.Text.Encoding.UTF8, "application/json"));
+                var stringRes = res.Content.ReadAsStringAsync().Result;
+                var it = JsonConvert.DeserializeObject<ItemDto>(stringRes);
+                _catDVM.AddItem(new Item() {Name = it.Name, AddedOn = it.AddedOn, Category = _catDVM.category,ItemId = it.ItemId, Priority = (Priority)it.Priority});
+                Success = true;
+                Hide();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Something went wrong: {e}");
+                this.TxtBottomError.Text = e.Message;
+            }
+        }
+
+
+        public bool Validate()
+        {
+            string result = "";
+            bool success = true;
+
+            if (GetItemName().Length == 0)
+            {
+                this.TxtItemName.Foreground = new SolidColorBrush(Colors.Red);
+                result += "Name is required.\n";
+                success = false;
+            }
+
+            if (result.Length > 0)
+            {
+                this.TxtBottomError.Text = result;
+            }
+            return success;
+        }
+
+        private async void BtnAdd_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.TxtItemName.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtBottomError.Text = "";
+            await Create();
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
         }
     }
 }

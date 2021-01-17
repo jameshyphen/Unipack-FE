@@ -34,14 +34,14 @@ namespace Unipack.Views
         private CategoryViewModel _categoryVM;
         public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
 
-        public CategoryPage(AuthenticationViewModel vm) : this()
-        {
-            _authenticationVM = vm;
-        }
         public CategoryPage()
         {
             this.InitializeComponent();
             _categoryVM = new CategoryViewModel();
+        }
+        public CategoryPage(AuthenticationViewModel auth) : this()
+        {
+            _authenticationVM = auth;
         }
 
         private async void InitializeCategories()
@@ -108,7 +108,7 @@ namespace Unipack.Views
         private void CategoryGrid_ItemClick(object sender, ItemClickEventArgs e)
         {
             Category category = (Category) e.ClickedItem;
-            DetailParameters param = new DetailParameters(_authenticationVM, category);
+            CategoryDetailParameters param = new CategoryDetailParameters(_authenticationVM, category);
 
             page.Navigate(typeof(CategoryDetailPage), param);
         }
@@ -121,13 +121,13 @@ namespace Unipack.Views
     }
 }
 
-public class DetailParameters
+public class CategoryDetailParameters
 {
 
     public AuthenticationViewModel _authenticationVM { get; set; }
     public Category _category { get; set; }
 
-    public DetailParameters(AuthenticationViewModel AVM, Category cat)
+    public CategoryDetailParameters(AuthenticationViewModel AVM, Category cat)
     {
         _authenticationVM = AVM;
         _category = cat;

@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace Unipack.DTOs
 {
-    class CategoryDto
+    class ItemCategoryDto : ItemDto
     {
         public int CategoryId { get; set; }
-        public string Name { get; set; }
-        public DateTime AddedOn { get; set; }
-        public List<ItemDto> Items { get; set; }
+        public string CategoryName { get; set; }
     }
 }

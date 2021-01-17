@@ -11,23 +11,23 @@ namespace Unipack.ViewModels
 {
     public class CategoryDetailViewModel
     {
-        public ObservableCollection<Item> items { get; set; } = new ObservableCollection<Item>();
+        public ObservableCollection<Item> Items { get; set; } = new ObservableCollection<Item>();
         public Category category { get; set; }
         public User User { get; set; }
 
         public void AddItem(Item item)
         {
-            items.Add(item);
+            Items.Add(item);
         }
 
         public void DeleteItem(Item item)
         {
-            items.Remove(item);
+            Items.Remove(item);
         }
 
         public void Clear()
         {
-            items.Clear();
+            Items.Clear();
         }
 
     }
