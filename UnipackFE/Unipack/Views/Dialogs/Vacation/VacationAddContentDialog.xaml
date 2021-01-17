@@ -1,8 +1,8 @@
 ﻿<ContentDialog
-    x:Class="Unipack.Views.Dialogs.Vacation.VacationAddContentDialog"
+    x:Class="Unipack.Views.Dialogs.VacationAddContentDialog"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Unipack.Views.Dialogs"
+    xmlns:local="using:Unipack.Models"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
@@ -31,10 +31,11 @@
         <CalendarDatePicker Grid.Row="2" Grid.Column="1" x:Name="ReturnDatePicker" Header="Return date"  FontSize="20" Margin="0,0,0,5"/>
         <StackPanel Grid.Row="3" Orientation="Horizontal" Grid.ColumnSpan="2">
             <TextBlock  Text="Add locations" Grid.ColumnSpan="2" TextWrapping="Wrap" FontSize="20" />
-            <Button Margin="10,0,0,0"  Height="auto" Width="auto" >
+            <Button Margin="10,0,0,0"  Height="auto" Width="auto" Click="ButtonExpandAddLocation_Click">
                 <SymbolIcon Symbol="Add"  />
             </Button>
         </StackPanel>
+           
 
         <Grid Grid.Row="4" Grid.ColumnSpan="2" x:Name="AddLocationForm">
             <Grid.RowDefinitions>
@@ -64,9 +65,9 @@
         
 
 
-        <ListView ItemsSource="{Binding}" x:Name="LocationListView">
+        <ListView ItemsSource="{x:Bind Locations}" x:Name="LocationListView">
             <ListView.ItemTemplate>
-                <DataTemplate>
+                <DataTemplate x:DataType="local:VacationLocation">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Text="{x:Bind CityName}"/>
                         <TextBlock Text="{x:Bind CountryName}"/>

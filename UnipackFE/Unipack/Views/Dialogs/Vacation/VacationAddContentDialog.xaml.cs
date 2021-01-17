@@ -1,12 +1,14 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
 using System.Runtime.InteropServices.WindowsRuntime;
 using System.Threading.Tasks;
 using Unipack.DTOs;
+using Unipack.Enums;
 using Unipack.Models;
 using Unipack.ViewModels;
 using Windows.Foundation;
@@ -21,11 +23,11 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 
-namespace Unipack.Views.Dialogs.Vacation
+namespace Unipack.Views.Dialogs
 {
     public sealed partial class VacationAddContentDialog : ContentDialog
     {
-        ICollection<VacationLocation> Locations { get; set; }
+        ObservableCollection<VacationLocation> Locations { get; set; }
         private AuthenticationViewModel _authVM;
         private VacationViewModel _vacVM;
         public bool Success { get; set; }
@@ -34,7 +36,10 @@ namespace Unipack.Views.Dialogs.Vacation
             _vacVM = vacVM;
             _authVM = authVM;
             Success = false;
+            Locations = new ObservableCollection<VacationLocation>();
             this.InitializeComponent();
+            AddLocationForm.Visibility = Visibility.Collapsed;
+
         }
 
         private async void BtnAdd_OnClick(object sender, RoutedEventArgs e)
@@ -56,8 +61,29 @@ namespace Unipack.Views.Dialogs.Vacation
                 await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/vacation",
                     new StringContent(vacationJson, System.Text.Encoding.UTF8, "application/json"));
                 _vacVM.AddVacation(new Models.Vacation { AddedOn = vacation.AddedOn, Name = vacation.Name, DateDeparture = vacation.DateDeparture, 
-                                                            DateReturn = vacation.DateReturn, Locations = (ICollection<Models.VacationLocation>)vacation.Locations,
-                                                            VacationId = vacation.VacationId, PackLists = (ICollection<Models.PackList>)vacation.PackLists});
+                                                            DateReturn = vacation.DateReturn, 
+                                                            Locations = vacation.Locations.Select(loc => 
+                                                                    new VacationLocation {AddedOn = loc.AddedOn, CityName = loc.CityName, 
+                                                                                            CountryName = loc.CountryName, DateArrival = loc.DateArrival, 
+                                                                                            DateDeparture =loc.DateDeparture, 
+                                                                                            VacationLocationId = loc.VacationLocationId }).ToList(),
+                                                            VacationId = vacation.VacationId, 
+                                                            PackLists = vacation.PackLists.Select(pl => 
+                                                                    new PackList
+                                                                    {
+                                                                        AddedOn = pl.AddedOn,
+                                                                        Name = pl.Name,
+                                                                        PackListId = pl.PackListId,
+                                                                        Items = pl.Items.Select(i => new Item
+                                                                        {
+                                                                            Name = i.Name,
+                                                                            AddedOn = i.AddedOn, //Category = i.CategoryId,
+                                                                            ItemId = i.ItemId,
+                                                                            Priority = (Priority)i.Priority
+                                                                        }).ToList()
+                                                                    }).ToList()
+                                                            });
+                
                 Success = true;
                 Hide();
             }
@@ -126,12 +152,28 @@ namespace Unipack.Views.Dialogs.Vacation
 
             var loc = new VacationLocation() { AddedOn = DateTime.Now, CityName = CityNameLoc.Text, CountryName = CountryNameLoc.Text, DateArrival = arriveTime, DateDeparture = departTime };
             Locations.Add(loc);
+            Locations.OrderBy(l => l.DateArrival);
             LocationListView.DataContext = Locations;
 
-            AddLocationForm.Visibility = Visibility.Collapsed;
+            ResetLocationForm();
         }
 
         private void ButtonCancelLocation_Click(object sender, RoutedEventArgs e)
+        {
+            ResetLocationForm();
+        }
+
+        private void ButtonExpandAddLocation_Click(object sender, RoutedEventArgs e)
+        {
+            AddLocationForm.Visibility = Visibility.Visible;
+        }
+
+        private void BtnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            Hide();
+        }
+
+        private void ResetLocationForm() 
         {
             CountryNameLoc.Text = "";
             CityNameLoc.Text = "";

@@ -7,8 +7,9 @@ using Unipack.Enums;
 
 namespace Unipack.DTOs
 {
-    public class TaskDto
+    public class PackTaskDto
     {
+        public int PackTaskId { get; set; }
         public string Name { get; set; }
         public bool Completed { get; set; }
         public DateTime AddedOn { get; set; }

@@ -3,16 +3,16 @@ using Unipack.Enums;
 
 namespace Unipack.Models
 {
-    public class VacationTask
+    public class PackTask
     {
-        public int VacationTaskId { get; set; }
+        public int PackTaskId { get; set; }
 
         public string Name { get; set; }
         public User Author { get; set; }
 
         public DateTime AddedOn { get; set; }
 
-        public DateTime DeadLine { get; set; }
+        public DateTime Deadline { get; set; }
 
         public Boolean Completed;
 

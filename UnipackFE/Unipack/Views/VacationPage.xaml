@@ -48,7 +48,7 @@
                         
                         <StackPanel Orientation="Horizontal">
                             <TextBlock Text="To Do Lists: "/>
-                                <TextBlock  Text="{x:Bind VacationLists.Count}" Margin="10,0,0,0"/>
+                                <TextBlock  Text="{x:Bind PackLists.Count}" Margin="10,0,0,0"/>
 
                             </StackPanel>
                         </StackPanel>
