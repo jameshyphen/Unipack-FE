@@ -10,6 +10,7 @@
 
     <Grid>
         <TextBlock x:Name="Header" Text=""/>
+        <Frame x:Name="Frame"/>
         <ListView x:Name="PackListView"
               ItemsSource="{x:Bind PackLists}">
             <ListView.ItemTemplate>

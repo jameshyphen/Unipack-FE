@@ -35,8 +35,6 @@ namespace Unipack.Views
         public VacationDetailPage()
         {
             this.InitializeComponent();
-
-           
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -84,5 +82,11 @@ namespace Unipack.Views
         private void TaskCheckBox_Click_1(object sender, RoutedEventArgs e)
         {
         }
+
+        private void VacationPageDetails(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(MapPage), Locations);
+        }
+
     }
 }
