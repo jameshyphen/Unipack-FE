@@ -35,6 +35,7 @@ namespace Unipack.Views
         public VacationDetailPage()
         {
             this.InitializeComponent();
+
            
         }
 
@@ -55,17 +56,33 @@ namespace Unipack.Views
             PackLists = (ObservableCollection<PackList>)vac.PackLists;
         }
 
-        private void DeleteItemButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteItemButton_Click(object sender, RoutedEventArgs e)
         {
             PackItem item = (PackItem)PackListView.SelectedItem;
             
             _vacationDVM.DeleteItem(item);
+            await _authVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/item/" + item.PackItemId);
+
         }
 
-        private void DeleteTaskButton_Click(object sender, RoutedEventArgs e)
+        private async void DeleteTaskButton_Click(object sender, RoutedEventArgs e)
         {
             PackTask task = (PackTask)PackListView.SelectedItem;
             _vacationDVM.DeleteTask(task);
+            await _authVM.Client.DeleteAsync("http://hyphen-solutions.be/unipack/api/task/" + task.PackTaskId);
+        }
+
+        private void ItemCheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            PackItem item = (PackItem)PackListView.SelectedItem;
+            //GET checkbox?
+
+
+            //await _authVM.Client.
+        }
+
+        private void TaskCheckBox_Click_1(object sender, RoutedEventArgs e)
+        {
         }
     }
 }

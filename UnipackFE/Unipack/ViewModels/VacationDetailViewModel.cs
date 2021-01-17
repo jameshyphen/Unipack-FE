@@ -20,10 +20,10 @@ namespace Unipack.ViewModels
             PackLists.Add(packList);
         }
 
-        public void AddItemToPackList(PackList packList, Item item)
+        public void AddItemToPackList(PackList packList, PackItem item)
         {
             var list = PackLists.Where(p => p.PackListId == packList.PackListId).FirstOrDefault();
-            list.PackItems.Add();
+            list.PackItems.Add(item);
         }
 
         public void DeleteItem(PackItem item)

@@ -23,7 +23,7 @@
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Item">
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}"/>
+                                        <CheckBox x:Name="ItemCheckBox" Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}" Click="ItemCheckBox_Click" />
                                     </StackPanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
@@ -37,7 +37,7 @@
                             <GridView.ItemTemplate>
                                 <DataTemplate x:DataType="local:Item">
                                     <StackPanel Orientation="Horizontal">
-                                        <CheckBox Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}"/>
+                                        <CheckBox " Content="{x:Bind Name}" IsChecked="{Binding IsCompleted}" Click="TaskCheckBox_Click_1"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridView.ItemTemplate>
