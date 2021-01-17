@@ -27,13 +27,11 @@ namespace Unipack.Views.Dialogs.CategoryDetail
 {
     public sealed partial class CategoryDetailAddNewContentDialog : ContentDialog
     {
-        public AuthenticationViewModel _authVM { get; set; }
         public CategoryDetailViewModel _catDVM { get; set; }
         public bool Success { get; set; }
 
-        public CategoryDetailAddNewContentDialog(AuthenticationViewModel authVM, CategoryDetailViewModel catDVM)
+        public CategoryDetailAddNewContentDialog(CategoryDetailViewModel catDVM)
         {
-            _authVM = authVM;
             _catDVM = catDVM;
             Success = false;
             this.InitializeComponent();
@@ -62,14 +60,8 @@ namespace Unipack.Views.Dialogs.CategoryDetail
             {
                 if (!Validate())
                     return;
-                HttpClient client = new HttpClient();
-                var item = new ItemCategoryDto { AddedOn = DateTime.Now, Name = GetItemName(), Priority = (int) GetPriority(), CategoryId = _catDVM.category.Id, CategoryName = _catDVM.category.Name };
-                var itemJson = JsonConvert.SerializeObject(item);
-                var res = await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/item",
-                    new StringContent(itemJson, System.Text.Encoding.UTF8, "application/json"));
-                var stringRes = res.Content.ReadAsStringAsync().Result;
-                var it = JsonConvert.DeserializeObject<ItemDto>(stringRes);
-                _catDVM.AddItem(new Item() {Name = it.Name, AddedOn = it.AddedOn, Category = _catDVM.category,ItemId = it.ItemId, Priority = (Priority)it.Priority});
+                var item = new ItemCategoryDto { AddedOn = DateTime.Now, Name = GetItemName(), Priority = (int) GetPriority(), CategoryId = _catDVM.Category.Id, CategoryName = _catDVM.Category.Name };
+                _catDVM.AddItemAPI(item);
                 Success = true;
                 Hide();
             }

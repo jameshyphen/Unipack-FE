@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -24,23 +25,29 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Unipack.Views.Dialogs
 {
-    public sealed partial class CategoryEditContentDialog : ContentDialog
+    public sealed partial class ItemEditContentDialog : ContentDialog
     {
-        public CategoryViewModel _catVM { get; set; }
+        public AuthenticationViewModel _authVM { get; set; }
+        public ItemViewModel _catVM { get; set; }
         public bool Success { get; set; }
-        public Category Current { get; set; }
-        public CategoryEditContentDialog(CategoryViewModel catVM, Category cat)
+        public Item Current { get; set; }
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
+        public ItemEditContentDialog(AuthenticationViewModel authVM, ItemViewModel catVM, Item cat)
         {
+            _authVM = authVM;
             _catVM = catVM;
             Success = false;
+            InitializeCategories();
             this.InitializeComponent();
             Current = cat;
-            TxtCategoryName.Text = cat.Name;
+            TxtItemName.Text = cat.Name;
         }
-
-        public string GetCategoryName()
+        public Category GetCategory()
         {
-            Current.Name = TxtCategoryName.Text;
+            return (Category)CmbCategory.SelectedItem;
+        }
+        public string GetItemName()
+        {
             return Current.Name;
         }
 
@@ -50,8 +57,14 @@ namespace Unipack.Views.Dialogs
             {
                 if (!Validate())
                     return;
-                var category = new CategoryDto { Name = GetCategoryName(), AddedOn = Current.AddedOn, CategoryId = Current.Id};
-                _catVM.EditCategory(category, Current);
+                var category = GetCategory();
+                var Item = new ItemDto { Name = GetItemName(), AddedOn = Current.AddedOn, ItemId = Current.ItemId, CategoryId = category.Id};
+                var ItemJson = JsonConvert.SerializeObject(Item);
+                await _authVM.Client.PutAsync("http://hyphen-solutions.be/unipack/api/Item/"+Item.ItemId,
+                    new StringContent(ItemJson, System.Text.Encoding.UTF8, "application/json"));
+                Current.Name = Item.Name;
+                Current.Category = category;
+                _catVM.EditItem(Current);
                 Success = true;
                 Hide();
             }
@@ -62,15 +75,24 @@ namespace Unipack.Views.Dialogs
             }
         }
 
+        private async void InitializeCategories()
+        {
+            var res = await _authVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category");
+            var stringRes = res.Content.ReadAsStringAsync().Result;
+            var categories = JsonConvert.DeserializeObject<List<CategoryDto>>(stringRes);
+
+            categories.ForEach(c => Categories.Add(new Category { Name = c.Name, Id = c.CategoryId }));
+
+        }
 
         public bool Validate()
         {
             string result = "";
             bool success = true;
 
-            if (GetCategoryName().Length == 0)
+            if (GetItemName().Length == 0)
             {
-                this.TxtCategoryName.Foreground = new SolidColorBrush(Colors.Red);
+                this.TxtItemName.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Name is required.\n";
                 success = false;
             }
@@ -84,7 +106,7 @@ namespace Unipack.Views.Dialogs
 
         private async void BtnEdit_OnClick(object sender, RoutedEventArgs e)
         {
-            this.TxtCategoryName.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtItemName.Foreground = new SolidColorBrush(Colors.Black);
             this.TxtBottomError.Text = "";
             await Edit();
         }

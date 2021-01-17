@@ -1,14 +1,42 @@
 ﻿<Page
+    
     x:Class="Unipack.Views.ItemPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Unipack.Views"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:x1="using:Windows.UI.Xaml.Data"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Frame Name="page">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="120"/>
+                <RowDefinition Height="0.8*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0" HorizontalAlignment="Center" Name="test" Text="Items" TextWrapping="Wrap" FontSize="48"/>
+            <StackPanel x:Name="stackPanel" Orientation="Vertical" Grid.Row="1">
+                <Button Margin="5" Content="Add Item" FontSize="25" Click="BtnAdd_Click" HorizontalAlignment="Center"/>
+                <TextBox Margin="5" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            </StackPanel>
+            <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" SelectionChanged="ItemGrid_SelectionChanged">
+                <GridView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock FontSize="20" Text="{Binding Name}" Margin="2"/>
+                            <StackPanel Orientation="Horizontal">
+                                <TextBlock FontSize="15" Text="Category: "/>
+                                <TextBlock FontSize="12" Text="{Binding Category.Name}" Margin="2"/>
+                            </StackPanel>
+                            <StackPanel Orientation="Horizontal">
+                                <Button Content="Delete" Name="Delete" Click="DeleteItem" HorizontalAlignment="Center"/>
+                                <Button Content="Edit" Name="Edit"  Click="EditItem" HorizontalAlignment="Center"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </GridView.ItemTemplate>
+            </GridView>
 
-    <Grid>
-
-    </Grid>
+        </Grid>
+    </Frame>
 </Page>

@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -24,20 +25,29 @@ using Windows.UI.Xaml.Navigation;
 
 namespace Unipack.Views.Dialogs
 {
-    public sealed partial class CategoryAddContentDialog : ContentDialog
+    public sealed partial class ItemAddContentDialog : ContentDialog
     {
-        public CategoryViewModel _catVM { get; set; }
+        public AuthenticationViewModel _authVM { get; set; }
+        public ItemViewModel _catVM { get; set; }
+        public ObservableCollection<Category> Categories { get; set; } = new ObservableCollection<Category>();
         public bool Success { get; set; }
-        public CategoryAddContentDialog(CategoryViewModel catVM)
+        public ItemAddContentDialog(AuthenticationViewModel authVM, ItemViewModel catVM)
         {
+            _authVM = authVM;
             _catVM = catVM;
             Success = false;
+            InitializeCategories();
             this.InitializeComponent();
         }
 
-        public string GetCategoryName()
+        public Category GetCategory()
         {
-            return TxtCategoryName.Text;
+            return (Category)CmbCategory.SelectedItem;
+        }
+
+        public string GetItemName()
+        {
+            return TxtItemName.Text;
         }
 
         public async Task Create()
@@ -46,17 +56,30 @@ namespace Unipack.Views.Dialogs
             {
                 if (!Validate())
                     return;
-                var category = new CategoryDto { Name = GetCategoryName(), AddedOn = DateTime.Now };
-                _catVM.AddCategoryAPI(category);
+                var category = GetCategory();
+                var Item = new ItemDto { Name = GetItemName(), AddedOn = DateTime.Now, CategoryId = category.Id };
+                var ItemJson = JsonConvert.SerializeObject(Item);
+                await _authVM.Client.PostAsync("http://hyphen-solutions.be/unipack/api/Item",
+                    new StringContent(ItemJson, System.Text.Encoding.UTF8, "application/json"));
+                _catVM.AddItem(new Item { AddedOn = Item.AddedOn, Name = Item.Name, Category = category });
                 Success = true;
                 Hide();
             }
-
             catch (Exception e)
             {
                 Console.WriteLine($"Something went wrong: {e}");
                 this.TxtBottomError.Text = e.Message;
             }
+        }
+
+        private async void InitializeCategories()
+        {
+            var res = await _authVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category");
+            var stringRes = res.Content.ReadAsStringAsync().Result;
+            var categories = JsonConvert.DeserializeObject<List<CategoryDto>>(stringRes);
+
+            categories.ForEach(c => Categories.Add(new Category { Name = c.Name, Id = c.CategoryId }));
+           
         }
 
 
@@ -65,9 +88,9 @@ namespace Unipack.Views.Dialogs
             string result = "";
             bool success = true;
 
-            if (GetCategoryName().Length == 0)
+            if (GetItemName().Length == 0)
             {
-                this.TxtCategoryName.Foreground = new SolidColorBrush(Colors.Red);
+                this.TxtItemName.Foreground = new SolidColorBrush(Colors.Red);
                 result += "Name is required.\n";
                 success = false;
             }
@@ -81,7 +104,7 @@ namespace Unipack.Views.Dialogs
 
         private async void BtnAdd_OnClick(object sender, RoutedEventArgs e)
         {
-            this.TxtCategoryName.Foreground = new SolidColorBrush(Colors.Black);
+            this.TxtItemName.Foreground = new SolidColorBrush(Colors.Black);
             this.TxtBottomError.Text = "";
             await Create();
         }
