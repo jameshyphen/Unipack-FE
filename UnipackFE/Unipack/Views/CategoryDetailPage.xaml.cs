@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
@@ -31,25 +32,36 @@ namespace Unipack.Views
             this.InitializeComponent();
         }
 
-        private async void InitializeCategoryDetails(Category cat)
+        private void InitializeCategoryDetails(Category cat)
         {
-            _categoryDVM = new CategoryDetailViewModel() { category = cat };
-            header.Text = _categoryDVM.category.Name;
-            var res = await _authenticationVM.Client.GetAsync("http://hyphen-solutions.be/unipack/api/category/"+_categoryDVM.category.Id+"/items");
-            var stringRes = res.Content.ReadAsStringAsync().Result;
-            var items = JsonConvert.DeserializeObject<CategoryDto>(stringRes);
+            _categoryDVM = new CategoryDetailViewModel(cat, _authenticationVM);
+            header.Text = _categoryDVM.Category.Name;
+            Refresh();
+        }
 
-            items.Items.ToList().ForEach(c => _categoryDVM.AddItem(new Item {AddedOn = c.AddedOn, ItemId = c.ItemId, Name = c.Name, Priority = (Priority) c.Priority}));
-            ItemGrid.DataContext = _categoryDVM.items;
+        private void Refresh()
+        {
+            ItemGrid.DataContext = _categoryDVM.Items;
         }
 
         private async void BtnAddNew_Click(object sender, RoutedEventArgs e)
         {
-            CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_authenticationVM, _categoryDVM);
+            CategoryDetailAddNewContentDialog addContentDialog = new CategoryDetailAddNewContentDialog(_categoryDVM);
 
             await addContentDialog.ShowAsync();
             if (!addContentDialog.Success)
                 return;
+            Refresh();
+        }
+
+        private void BtnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            var button = (Button)sender;
+            var item = (Item)button.DataContext;
+
+            _categoryDVM.DeleteItem(item);
+
+            Refresh();
         }
 
         public void ItemGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -63,10 +75,15 @@ namespace Unipack.Views
             page.Navigate(typeof(ItemPage), _authenticationVM);
         }
 
+        private void SearchBar_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            ItemGrid.DataContext = new ObservableCollection<Item>(_categoryDVM.Items.Where(c => c.Name.ToLower().Contains(SearchBar.Text.ToLower())));
+        }
+
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            DetailParameters param = (DetailParameters)e.Parameter;
+            CategoryDetailParameters param = (CategoryDetailParameters)e.Parameter;
             _authenticationVM = param._authenticationVM;
             InitializeCategoryDetails(param._category);
         }

@@ -1,0 +1,14 @@
+﻿<Page
+    x:Class="Unipack.Views.MapPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Unipack.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:maps="using:Windows.UI.Xaml.Controls.Maps"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <maps:MapControl x:Name="Map"
+      MapServiceToken="06wryzVtOhtoAQCw2tjc~s-wxGSjY2vPL-mmZF9c0Gg~AiJooB1s8FiIoRlFQObg5pG56Rx6f95m7Os1egC_MDWS7J1JHqSJYAngluthph8D"
+                     ZoomLevel="9"/>
+</Page>

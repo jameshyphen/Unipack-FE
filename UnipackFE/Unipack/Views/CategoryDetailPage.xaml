@@ -10,19 +10,15 @@
     <Frame Name="page">
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="0.1*"/>
-                <RowDefinition Height="0.1*"/>
+                <RowDefinition Height="70"/>
+                <RowDefinition Height="120"/>
                 <RowDefinition Height="0.8*"/>
             </Grid.RowDefinitions>
-            <TextBlock Name="header" Grid.Row="0" TextWrapping="Wrap" FontSize="48"/>
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="0.25*"/>
-                    <ColumnDefinition Width="0.75*"/>
-                </Grid.ColumnDefinitions>
-                <Button Grid.Column="0" Content="Add new item" FontSize="25" Click="BtnAddNew_Click" HorizontalAlignment="Center"/>
-                <TextBox Grid.Column="1" HorizontalAlignment="Center" Text="Search. . ." FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
-            </Grid>
+            <TextBlock Name="header" HorizontalAlignment="Center" Grid.Row="0" TextWrapping="Wrap" FontSize="48"/>
+            <StackPanel Orientation="Vertical" Grid.Row="1">
+                <Button Margin="5" Content="Add new item or task" FontSize="25" Click="BtnAddNew_Click" HorizontalAlignment="Center"/>
+                <TextBox Margin="5" Grid.Column="1" Name="SearchBar" TextChanged="SearchBar_TextChanged" HorizontalAlignment="Center" MinWidth="100" Text="" FontSize="25" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            </StackPanel>
             <GridView Grid.Row="2" x:Name="ItemGrid" ItemsSource="{Binding}" x:DefaultBindMode="TwoWay" SelectionMode="Single" IsItemClickEnabled="True" ItemClick="ItemGrid_ItemClick" SelectionChanged="ItemGrid_SelectionChanged">
                 <GridView.ItemTemplate>
                     <DataTemplate>
@@ -33,8 +29,7 @@
                                 <TextBlock FontSize="25" Text="{Binding AddedOn}" Margin="2"/>
                             </StackPanel>
                             <StackPanel Orientation="Horizontal">
-                                <Button Content="Delete" Command="{Binding DeleteCommand}" CommandParameter="{Binding Name}" HorizontalAlignment="Center"/>
-                                <Button Content="Edit" HorizontalAlignment="Center"/>
+                                <Button Content="Delete" Click="BtnDelete_Click" HorizontalAlignment="Center"/>
                             </StackPanel>
                         </StackPanel>
                     </DataTemplate>
